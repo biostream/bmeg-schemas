@@ -1,0 +1,7 @@
+syntax = "proto2";
+
+package bmeg.gaea.schema;
+
+message Gene {
+    required string name = 1;
+}
