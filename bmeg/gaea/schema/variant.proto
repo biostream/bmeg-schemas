@@ -148,7 +148,7 @@ message VariantCall {
 message BioSample {
     // label or symbolic identifier for the biosample, from the original datasource
     // 
-    // In the context of TCGA, might be TCGA-A1-A0SB-01A-11D-A142-09_TCGA-A1-A0SB-10B-01D-A142-09
+    // In the context of TCGA, might be TCGA-A1-A0SB-01A-11D-A142-09 TCGA-A1-A0SB-10B-01D-A142-09
     // this is a tumor and normal id concatenated together....assuming a VariantCall only involves
     // one BioSample (bad practice).
     string tumor = 1;
@@ -179,7 +179,9 @@ message Individual {
 }
 
 message GeneExpression {
-    
+    string barcode = 1;
+    string source = 2;
+    map<string, string> expressions = 3;
 }
 
 message IndividualList {
