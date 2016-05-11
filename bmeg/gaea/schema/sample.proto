@@ -135,7 +135,7 @@ message VariantCall {
     // edges to VariantEffect
     repeated string hasEffectEdges = 11;
 
-    // edges to BioSample
+    // edges to Biosample
     repeated string tumorSampleEdges = 12;
     repeated string normalSampleEdges = 13;
 
@@ -144,16 +144,16 @@ message VariantCall {
 }
 
 // From GA4GH:
-//    A BioSample refers to a unit of biological material from which the substrate
+//    A Biosample refers to a unit of biological material from which the substrate
 //   molecules (e.g. genomic DNA, RNA, proteins) for molecular analyses (e.g.
 //   sequencing, array hybridisation, mass-spectrometry) are extracted. Examples
 //   would be a tissue biopsy, a single cell from a culture for single cell genome
 //   sequencing or a protein fraction from a gradient centrifugation.
 //   Several instances (e.g. technical replicates) or types of experiments (e.g.
-//   genomic array as well as RNA-seq experiments) may refer to the same BioSample.
-//   In the context of the GA4GH metadata schema, BioSample constitutes the central
+//   genomic array as well as RNA-seq experiments) may refer to the same Biosample.
+//   In the context of the GA4GH metadata schema, Biosample constitutes the central
 //   reference object.
-message BioSample {
+message Biosample {
     // There is a separate biosample for the tumor and the normal sample,
     // and the variant call represents the difference between them
 
@@ -172,7 +172,7 @@ message BioSample {
     // edges to GeneExpression
     repeated string hasExpressionEdges = 5;
 
-    // When necessary, some way to add BioSample observations might be nice, like: map<string, sring> observations = 4;
+    // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
 
 message Individual {
@@ -183,7 +183,7 @@ message Individual {
     // the source of this data
     string source = 2;
 
-    // edges to BioSample
+    // edges to Biosample
     repeated string hasSampleEdges = 3;
 
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
