@@ -20,9 +20,11 @@ package bmeg.gaea.schema;
 // (0-based).
 // ***Modified from GA4GH to include end position.***
 message Position {
+    string name = 1;
+
     // The name of the `Reference` on which the `Position` is located.
     // (e.g. `chr20` or `X`)
-    string reference = 1;
+    string chromosome = 2;
 
     // The 0-based offset from the start of the forward strand for that
     // `Reference`. Genomic positions are non-negative integers less than
@@ -33,34 +35,30 @@ message Position {
     // Genomic positions are non-negative integers less than reference length.
     // Variants spanning the join of circular genomes are represented as
     // two variants one on each side of the join (position 0).
-    int64 start = 2;
+    int64 start = 3;
 
     // The end position (exclusive), resulting in [start, end) closed-open
     // interval.
     //
     // For Variantcalls: This is typically calculated by `start + referenceBases.length`.
-    int64 end = 3;
+    int64 end = 4;
 
     // // Strand the position is associated with.
     // Strand strand = 4;
-    string strand = 4;
+    string strand = 5;
 }
 
 // Annotation of a contiguous region of a sequence.
 // An example might be a gene or a protein.
 // For example, a position X might corresponds to gene/Feature TP53.
-//
 message Feature {
+    string name = 1;
+
     // position at which this feature occurs (0-based).
     // Features spanning the join of circular genomes are represented as
     // two features one on each side of the join (position 0).
-    Position position = 1;
-
-    // Feature that is annotated by this region.  Normally, this will be a term in
-    // the Sequence Ontology. Identified features as "gene", etc...
-    // For now, just use strings instead of OntologyTerms
-    // OntologyTerm featureType;
-    string featureType = 2;
+    repeated string atPositionEdges = 2;
+    repeated string hasEffectEdges = 3;
 
     // Data dump/placeholder field.
     // 
@@ -71,7 +69,11 @@ message Feature {
     // defined as fields. Additional, the following attributes are added:
     // * Score - the GFF3 score column
     // * Phase - the GFF3 phase column for CDS features.
-    map<string, string> attributes = 3;
+    map<string, string> attributes = 4;
+}
+
+message Domain {
+    string name = 1;
 }
 
 // How does a particular mutation affect a transcript/protein?
@@ -82,12 +84,14 @@ message Feature {
 //
 // But MUCH simplified.
 message VariantCallEffect {
-    string source = 1;
+    string name = 1;
+    string source = 2;
 
     // The feature can mean either the gene or the protein this variant is associated with.
-    string feature = 2;
     string variantClassification = 3;
-    repeated string domains = 4;
+
+    // edges to Domain
+    repeated string inDomainEdges = 4;
 
     string dbsnpRS = 5;
     string dbsnpValStatus = 6;
@@ -104,36 +108,39 @@ message VariantCallEffect {
 // GA4GH is contained within 'CallSet'. Here it is a VariantCall field.
 // Genomic location has been replaced by a 'Position' object.
 message VariantCall {
+    string name = 1;
+
     // The source of this data
-    string source = 1;
+    string source = 2;
 
     // where on the genome this variant occurred 
-    Position position = 2;
-    string variantType = 3;
-
-    string tumorSampleName = 4;
-    string normalSampleName = 5;
+    // edges to Position
+    repeated string atPositionEdges = 3;
+    string variantType = 4;
 
     // The reference bases for this variant. They start at the given start
     // position. e.g. "T"
-    string referenceAllele = 6;
+    string referenceAllele = 5;
 
     // The normal alleles for this sample
-    string normalAllele1 = 7;
-    string normalAllele2 = 8;
+    string normalAllele1 = 6;
+    string normalAllele2 = 7;
 
     // The genotype of this variant call. GA4GH uses int32. Here it is a string.
-    string tumorAllele1 = 9;
-    string tumorAllele2 = 10;
+    string tumorAllele1 = 8;
+    string tumorAllele2 = 9;
 
-    string sequencer = 11;
-    string tumorSampleUUID = 12;
-    string matchedNormSampleUUID = 13;
+    string sequencer = 10;
 
-    repeated VariantCallEffect variantCallEffects = 14;
+    // edges to VariantEffect
+    repeated string hasEffectEdges = 11;
+
+    // edges to BioSample
+    repeated string tumorSampleEdges = 12;
+    repeated string normalSampleEdges = 13;
 
     // A map of additional variant call information, including a Feature Id for now...
-    map<string, string> info = 15;
+    map<string, string> info = 14;
 }
 
 // From GA4GH:
@@ -156,10 +163,15 @@ message BioSample {
     // the source of this data
     string source = 2;
 
-    // The name of the individual this biosample was derived from.
-    string individualName = 3;
+    // original barcode
+    string barcode = 3;
 
-    repeated VariantCall variantCalls = 4;
+    // either tumor or normal for now
+    string sampleType = 4;
+
+    // edges to GeneExpression
+    repeated string hasExpressionEdges = 5;
+
     // When necessary, some way to add BioSample observations might be nice, like: map<string, sring> observations = 4;
 }
 
@@ -171,18 +183,17 @@ message Individual {
     // the source of this data
     string source = 2;
 
-    repeated BioSample bioSamples = 3;
+    // edges to BioSample
+    repeated string hasSampleEdges = 3;
 
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
     map<string, string> observations = 4;
 }
 
 message GeneExpression {
-    string barcode = 1;
-    string source = 2;
-    map<string, string> expressions = 3;
-}
+    string name = 1;
+    string barcode = 2;
+    string source = 3;
 
-message IndividualList {
-    repeated Individual individuals = 1;
+    map<string, string> expressions = 3;
 }
