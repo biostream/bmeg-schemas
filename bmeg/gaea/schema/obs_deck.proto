@@ -6,6 +6,31 @@ syntax = "proto3";
 
 package bmeg.gaea.schema;
 
+message HeavilyWeightedGenesSignaturesQuery {
+	repeated string geneList = 1;
+}
+
+message HeavilyWeightedGenesSignaturesResponse {
+	repeated responseItem responseItems = 1;
+
+	message responseItem {
+		EventData.EventMetadata signatureMetadata = 1;
+
+		// composite score for query gene set
+		float score = 2;
+	}
+}
+
+// This is a ObservationDeckQuery where there is no sampleList.
+message SampleDataForSamplesWithExtremeScoresQuery {
+	repeated EventData.EventMetadata signatureMetadata = 1;
+}
+
+// This is the same as ObservationDeckResponse.
+message SampleDataForSamplesWithExtremeScoresResponse {
+	repeated EventData eventData = 1;
+}
+
 // request some event data for a list of samples
 message ObservationDeckQuery {
 	// identify the sample set to report
@@ -28,7 +53,10 @@ message EventData {
 	// information about an event
 	message EventMetadata {
 		string eventID = 1;
+
+		// eventType could be something like mrna_expression, mutation_type, copy_number, clinical, etc.
 		string eventType = 2;
+
 		Datatype datatype = 3;
 		
 		// Is SampleData.val to be interpreted as a string, number, or category?
@@ -37,8 +65,16 @@ message EventData {
 			NUMERIC = 1;
 			CATEGORIC = 2;
 		}
+
+		// featureWeights applies to events that are signatures
+		repeated FeatureWeight featureWeights = 4;
+
+		message FeatureWeight {
+			string feature = 1;
+			float weight = 2;
+		}
 	}
-	
+
 	// sample data
 	message SampleData {
 		string sampleId = 1;
