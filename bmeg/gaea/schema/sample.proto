@@ -100,7 +100,7 @@ message VariantCallEffect {
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
-    map<string, string> info = 7;
+    map<string, string> info = 9;
 }
 
 // Here, a VariantCall is a combination of the 'Variant' and 'Call'
