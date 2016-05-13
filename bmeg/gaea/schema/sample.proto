@@ -57,8 +57,6 @@ message Feature {
     // position at which this feature occurs (0-based).
     // Features spanning the join of circular genomes are represented as
     // two features one on each side of the join (position 0).
-    repeated string atEdgesPosition = 2;
-    repeated string hasEdgesVariantEffect = 3;
 
     // Data dump/placeholder field.
     // 
@@ -91,10 +89,14 @@ message VariantCallEffect {
     string variantClassification = 3;
 
     // edges to Domain
-    repeated string inEdgesDomain = 4;
+    repeated string inDomainEdgesDomain = 4;
+    repeated string inFeatureEdgesFeature = 5;
 
-    string dbsnpRS = 5;
-    string dbsnpValStatus = 6;
+    // edges to VariantEffect
+    repeated string effectOfEdgesVariantCall = 6;
+
+    string dbsnpRS = 7;
+    string dbsnpValStatus = 8;
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
@@ -113,34 +115,32 @@ message VariantCall {
     // The source of this data
     string source = 2;
 
-    // where on the genome this variant occurred 
-    // edges to Position
-    repeated string atEdgesPosition = 3;
-    string variantType = 4;
+    string variantType = 3;
 
     // The reference bases for this variant. They start at the given start
     // position. e.g. "T"
-    string referenceAllele = 5;
+    string referenceAllele = 4;
 
     // The normal alleles for this sample
-    string normalAllele1 = 6;
-    string normalAllele2 = 7;
+    string normalAllele1 = 5;
+    string normalAllele2 = 6;
 
     // The genotype of this variant call. GA4GH uses int32. Here it is a string.
-    string tumorAllele1 = 8;
-    string tumorAllele2 = 9;
+    string tumorAllele1 = 7;
+    string tumorAllele2 = 8;
 
-    string sequencer = 10;
+    string sequencer = 9;
 
-    // edges to VariantEffect
-    repeated string hasEdgesVariantEffect = 11;
+    // where on the genome this variant occurred 
+    // edges to Position
+    repeated string atPositionEdgesPosition = 10;
 
     // edges to Biosample
-    repeated string tumorEdgesBiosample = 12;
-    repeated string normalEdgesBiosample = 13;
+    repeated string tumorSampleEdgesBiosample = 11;
+    repeated string normalSampleEdgesBiosample = 12;
 
     // A map of additional variant call information, including a Feature Id for now...
-    map<string, string> info = 14;
+    map<string, string> info = 13;
 }
 
 // From GA4GH:
@@ -169,8 +169,8 @@ message Biosample {
     // either tumor or normal for now
     string sampleType = 4;
 
-    // edges to GeneExpression
-    repeated string hasEdgesGeneExpression = 5;
+    // edges to Biosample
+    repeated string sampleOfEdgesIndividual = 5;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
@@ -183,11 +183,8 @@ message Individual {
     // the source of this data
     string source = 2;
 
-    // edges to Biosample
-    repeated string hasEdgesBiosample = 3;
-
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 4;
+    map<string, string> observations = 3;
 }
 
 message GeneExpression {
@@ -195,5 +192,8 @@ message GeneExpression {
     string source = 2;
     string barcode = 3;
 
-    map<string, string> expressions = 4;
+    // edges to GeneExpression
+    repeated string expressionForEdgesBiosample = 4;
+
+    map<string, string> expressions = 5;
 }
