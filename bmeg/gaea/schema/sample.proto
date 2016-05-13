@@ -197,3 +197,88 @@ message GeneExpression {
 
     map<string, string> expressions = 5;
 }
+
+message PhenotypeAssociation {
+    string name = 1;
+
+    repeated string hasGenotypeEdgesGenotype = 2;
+
+    // The context is unique to the PhenotypeAssociation, so for now using containment rather than name reference.
+    Context theContext = 3;
+
+    repeated string hasPhenotypeEdgesPhenotype = 4;
+}
+
+message Phenotype {
+    string name = 1;
+
+    repeated string isTypeEdgesOntologyTerm = 2;
+
+    string description = 3;
+}
+
+message OntologyTerm {
+    string name = 1;
+
+    string term = 2;
+    
+    string source = 3;
+}
+
+message Genotype {
+    string name = 1;
+
+    // Note: We will have null fields.
+    // If the genotype is a VariantCall, specify it here.
+    repeated string isVariantCallEdgesVariantCall = 2;
+
+    // If the genotype is a Biosample, specify it here.
+    repeated string isBiosampleEdgesBiosample = 3;
+
+    // If the genotype is an Individual, specify it here.
+    repeated string isIndividualEdgesIndividual = 4;
+
+    // If the genotype is a Feature, specify it here.
+    repeated string isFeatureEdgesFeature = 5;
+}
+
+// For now, Context nodes are contained within PhenotypeAssociation (as opposed to referencing)
+message Context {
+    string name = 1;
+
+    // If applicable, specify the relevant Machine Learning Model here.
+    repeated string involvesModelEdgesModel = 2;
+
+    // If applicable, specify relevant Drug(s) here.
+    repeated string involvesDrugEdgesDrug = 3;
+
+    // Edges to other evidence for the PhenotypeAssociation
+    repeated string hasEvidenceEdgesEvidence = 4;
+
+    // Additional information about this context for the PhenotypeAssociation
+    map<string, string> info = 5;
+}
+
+message Evidence {
+    string name = 1;
+
+    // In the future, we might want to turn this field into an edge to a full-fledged Publication object
+    repeated string pmid = 2;
+
+    // Information about this evidence item
+    map<string, string> info = 3;
+}
+
+message Drug {
+    string name = 1;
+
+    // Each synonym may end up as a node.
+    repeated string synonyms = 2;
+
+    map<string, string> info = 3;
+}
+
+// Placeholder for the entire machine learning schema
+message Model {
+    string name = 1;
+}
