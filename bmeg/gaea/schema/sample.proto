@@ -195,5 +195,5 @@ message GeneExpression {
     // edges to GeneExpression
     repeated string expressionForEdgesBiosample = 4;
 
-    map<string, string> expressions = 5;
+    map<string, double> expressions = 5;
 }
