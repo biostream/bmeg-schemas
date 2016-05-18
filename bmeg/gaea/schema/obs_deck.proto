@@ -23,7 +23,15 @@ message HeavilyWeightedGenesSignaturesResponse {
 
 // This is a ObservationDeckQuery where there is no sampleList.
 message SampleDataForSamplesWithExtremeScoresQuery {
+
+	// return the top 50 and bottom 50 scoring samples for these signatureEvents
 	repeated EventData.EventMetadata signatureMetadata = 1;
+
+	// return the expression values for the samples returned in signatureMetadata
+	repeated EventData.EventMetadata expressionMetadata = 2;
+
+	// return the clinical event data for the samples returned in signatureMetadata
+	repeated EventData.EventMetadata clinicalEventMetadata = 3;
 }
 
 // This is the same as ObservationDeckResponse.
