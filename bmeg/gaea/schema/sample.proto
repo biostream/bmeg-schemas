@@ -283,3 +283,10 @@ message Model {
     string name = 1;
 }
 
+message LinearSignature {
+    string name = 1;
+    double intercept = 2;
+    map<string, double> coefficients = 3;
+
+    repeated string signatureForEdgesDrug = 4;
+}
