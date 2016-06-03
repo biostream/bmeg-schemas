@@ -278,9 +278,19 @@ message Drug {
     map<string, string> info = 3;
 }
 
-// Placeholder for the entire machine learning schema
 message Model {
+    // Name of the machine learning linear model.
     string name = 1;
+    // ID of the model.
+    string id = 2;
+    // Intercept of the model.
+    double intercept = 3;
+
+    // Edges to the drug the model is predicting. 
+    repeated string effectiveForEdgesDrug = 4;
+
+    // Coefficients of the model is stored as a map. 
+    map<string, double> coefficients = 5;
 }
 
 message LinearSignature {
