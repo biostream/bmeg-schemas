@@ -278,15 +278,17 @@ message Drug {
     map<string, string> info = 3;
 }
 
-// Placeholder for the entire machine learning schema
-message Model {
-    string name = 1;
-}
-
 message LinearSignature {
     string name = 1;
-    double intercept = 2;
-    map<string, double> coefficients = 3;
+    // Specify what the model predicts, i.e. 'drug response'.
+    string predicts = 2;
+    // Specify what phenotype it predicts, i.e. 'AZD6482'.
+    string phenotype = 3;
+    // Array for quantile normalization.
+    repeated double quantile = 4;
 
-    repeated string signatureForEdgesDrug = 4;
+    double intercept = 5;
+    map<string, double> coefficients = 6;
+   
+    repeated string signatureForEdgesDrug = 7;
 }
