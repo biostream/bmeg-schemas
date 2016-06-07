@@ -77,13 +77,11 @@ message VariantCallEffect {
     // The feature can mean either the gene or the protein this variant is associated with.
     string variantClassification = 3;
 
-    // edges to Domain
     // Target: Domain
     repeated string inDomainEdges = 4;
     // Target: Feature
     repeated string inFeatureEdges = 5;
 
-    // edges to VariantEffect
     // Target: VariantCall
     repeated string effectOfEdges = 6;
 
@@ -127,7 +125,6 @@ message VariantCall {
     // Target: Position
     repeated string atPositionEdges = 10;
 
-    // edges to Biosample
     // Target: Biosample
     repeated string tumorSampleEdges = 11;
     // Target: Biosample
@@ -163,7 +160,6 @@ message Biosample {
     // either tumor or normal for now
     string sampleType = 4;
 
-    // edges to Biosample
     // Target: Individual
     repeated string sampleOfEdges = 5;
 
@@ -187,7 +183,6 @@ message GeneExpression {
     string source = 2;
     string barcode = 3;
 
-    // edges to GeneExpression
     // Target: Biosample
     repeated string expressionForEdges = 4;
 
@@ -203,7 +198,7 @@ message PhenotypeAssociation {
     // Target: Phenotype
     repeated string hasPhenotypeEdges = 3;
 
-    // The context is unique to the PhenotypeAssociation
+    // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
     // Target: Drug Evidence
     repeated string hasContextEdges = 4;
 
