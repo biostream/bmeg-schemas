@@ -4,17 +4,6 @@ package bmeg.gaea.schema;
 
 // import "google/protobuf/struct.proto";
 
-// // Indicates the associated DNA strand for some data item.
-// enum Strand {
-//     STRAND_UNSPECIFIED = 0;
-
-//     // The negative (-) strand.
-//     NEG_STRAND = 1;
-
-//     // The postive (+) strand.
-//     POS_STRAND = 2;
-// }
-
 // A `Position` is one or more (consecutive***) bases in some `Reference`. A `Position` is
 // represented by a `Reference` name, and a base number on that `Reference`
 // (0-based).
@@ -88,12 +77,13 @@ message VariantCallEffect {
     // The feature can mean either the gene or the protein this variant is associated with.
     string variantClassification = 3;
 
-    // edges to Domain
-    repeated string inDomainEdgesDomain = 4;
-    repeated string inFeatureEdgesFeature = 5;
+    // Target: Domain
+    repeated string inDomainEdges = 4;
+    // Target: Feature
+    repeated string inFeatureEdges = 5;
 
-    // edges to VariantEffect
-    repeated string effectOfEdgesVariantCall = 6;
+    // Target: VariantCall
+    repeated string effectOfEdges = 6;
 
     string dbsnpRS = 7;
     string dbsnpValStatus = 8;
@@ -132,12 +122,13 @@ message VariantCall {
     string sequencer = 9;
 
     // where on the genome this variant occurred 
-    // edges to Position
-    repeated string atPositionEdgesPosition = 10;
+    // Target: Position
+    repeated string atPositionEdges = 10;
 
-    // edges to Biosample
-    repeated string tumorSampleEdgesBiosample = 11;
-    repeated string normalSampleEdgesBiosample = 12;
+    // Target: Biosample
+    repeated string tumorSampleEdges = 11;
+    // Target: Biosample
+    repeated string normalSampleEdges = 12;
 
     // A map of additional variant call information, including a Feature Id for now...
     map<string, string> info = 13;
@@ -169,8 +160,8 @@ message Biosample {
     // either tumor or normal for now
     string sampleType = 4;
 
-    // edges to Biosample
-    repeated string sampleOfEdgesIndividual = 5;
+    // Target: Individual
+    repeated string sampleOfEdges = 5;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
@@ -192,8 +183,8 @@ message GeneExpression {
     string source = 2;
     string barcode = 3;
 
-    // edges to GeneExpression
-    repeated string expressionForEdgesBiosample = 4;
+    // Target: Biosample
+    repeated string expressionForEdges = 4;
 
     map<string, double> expressions = 5;
 }
@@ -201,18 +192,25 @@ message GeneExpression {
 message PhenotypeAssociation {
     string name = 1;
 
-    repeated string hasGenotypeEdgesGenotype = 2;
+    // Target: VariantCall Biosample Individual Feature
+    repeated string hasGenotypeEdges = 2;
 
-    // The context is unique to the PhenotypeAssociation, so for now using containment rather than name reference.
-    Context theContext = 3;
+    // Target: Phenotype
+    repeated string hasPhenotypeEdges = 3;
 
-    repeated string hasPhenotypeEdgesPhenotype = 4;
+    // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
+    // Target: Drug Evidence
+    repeated string hasContextEdges = 4;
+
+    // Additional information about the context
+    map<string, string> info = 5;    
 }
 
 message Phenotype {
     string name = 1;
 
-    repeated string isTypeEdgesOntologyTerm = 2;
+    // Target: OntologyTerm
+    repeated string isTypeEdges = 2;
 
     string description = 3;
 }
@@ -223,40 +221,6 @@ message OntologyTerm {
     string term = 2;
     
     string source = 3;
-}
-
-message Genotype {
-    string name = 1;
-
-    // Note: We will have null fields.
-    // If the genotype is a VariantCall, specify it here.
-    repeated string isVariantCallEdgesVariantCall = 2;
-
-    // If the genotype is a Biosample, specify it here.
-    repeated string isBiosampleEdgesBiosample = 3;
-
-    // If the genotype is an Individual, specify it here.
-    repeated string isIndividualEdgesIndividual = 4;
-
-    // If the genotype is a Feature, specify it here.
-    repeated string isFeatureEdgesFeature = 5;
-}
-
-// For now, Context nodes are contained within PhenotypeAssociation (as opposed to referencing)
-message Context {
-    string name = 1;
-
-    // If applicable, specify the relevant Machine Learning Model here.
-    repeated string involvesModelEdgesModel = 2;
-
-    // If applicable, specify relevant Drug(s) here.
-    repeated string involvesDrugEdgesDrug = 3;
-
-    // Edges to other evidence for the PhenotypeAssociation
-    repeated string hasEvidenceEdgesEvidence = 4;
-
-    // Additional information about this context for the PhenotypeAssociation
-    map<string, string> info = 5;
 }
 
 message Evidence {
@@ -290,5 +254,6 @@ message LinearSignature {
     double intercept = 5;
     map<string, double> coefficients = 6;
    
-    repeated string signatureForEdgesDrug = 7;
+    // Target: Drug
+    repeated string signatureForEdges = 7;
 }
