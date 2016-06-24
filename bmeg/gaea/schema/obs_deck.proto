@@ -39,6 +39,49 @@ message SampleDataForSamplesWithExtremeScoresResponse {
 	repeated EventData eventData = 1;
 }
 
+// query for signatures by name
+// If no query was sent, return all signatures
+message AvailableSignaturesQuery{
+	string query = 1;
+}
+
+// signature name response
+message AvailableSignaturesResponse{
+	repeated EventData.EventMetadata signatureEventMetadata = 1;
+}
+
+// correlator query
+message correlatorQuery{
+	EventData.EventMetadata pivotEvent = 1;
+	// TODO paging tells us how far down the ordered list of scored events we should return data for.
+	
+	CorrelatorPagingOptions correlatorPaging = 2;
+}
+
+// for specifying page of correlator results for each datatype
+message CorrelatorPagingOptions{
+	repeated DatatypePaging datatypePaging = 1;
+	
+	message DatatypePaging{
+		string datatype = 1;
+		int32 pageSize = 2;
+		
+		// descending from most positive scores
+		int32 selectedTopPage = 3;
+		
+		// ascending from most negative scores
+		int32 selectedBottomPage = 4;
+	}
+}
+
+// correlator response
+message CorrelatorResponse{
+	// note: EventData.EventMetadata.correlatorScore should be assigned for each result.
+	EventData correlatorResults = 1;
+}
+
+// TODO pathway graph query/response
+
 // request some event data for a list of samples
 message ObservationDeckQuery {
 	// identify the sample set to report
@@ -81,6 +124,8 @@ message EventData {
 			string feature = 1;
 			float weight = 2;
 		}
+		
+		float correlatorScore = 5;
 	}
 
 	// sample data
