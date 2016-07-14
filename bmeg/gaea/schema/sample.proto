@@ -254,9 +254,10 @@ message LinearSignature {
     double intercept = 5;
     map<string, double> coefficients = 6;
    
-    repeated double background = 7;
-    repeated double backgroundExperiment = 8;
+    string backgroundCohort = 7;
+    map<string, double> background = 8;
+    repeated double backgroundExperiment = 9;
 
     // Target: Drug
-    repeated string signatureForEdges = 9;
+    repeated string signatureForEdges = 10;
 }
