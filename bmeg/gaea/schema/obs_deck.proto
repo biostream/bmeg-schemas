@@ -6,6 +6,11 @@ syntax = "proto3";
 
 package bmeg.gaea.schema;
 
+//
+// USE CASE 1
+// as described in <https://docs.google.com/document/d/1Gd8bCiZsXqbRqwdlnw_hcNvKXDGIOXcAJZcJbUnDrGU/edit?usp=sharing>
+//
+
 message HeavilyWeightedGenesSignaturesQuery {
 	repeated string geneList = 1;
 }
@@ -39,6 +44,30 @@ message SampleDataForSamplesWithExtremeScoresResponse {
 	repeated EventData eventData = 1;
 }
 
+
+//
+// USE CASE 2
+// as described in <https://docs.google.com/document/d/1Gd8bCiZsXqbRqwdlnw_hcNvKXDGIOXcAJZcJbUnDrGU/edit?usp=sharing>
+//
+
+
+message InferredVariantToSignatureEdgeQuery {
+	repeated string geneList = 1;
+}
+
+// This is the same as ObservationDeckResponse.
+// We expect to have at least the following: expression, mutation call, and drug sensitivity signature.
+// Might also have copy number, and mutation impact score.
+message InferredVariantToSignatureEdgesResponse {
+	repeated EventData eventData = 1;
+}
+
+
+//
+// OTHER USEFUL MESSAGES
+//
+
+
 // query for signatures by name
 // If no query was sent, return all signatures
 message AvailableSignaturesQuery{
@@ -53,8 +82,8 @@ message AvailableSignaturesResponse{
 // correlator query
 message correlatorQuery{
 	EventData.EventMetadata pivotEvent = 1;
-	// TODO paging tells us how far down the ordered list of scored events we should return data for.
 	
+	// paging tells us how far down the ordered list of scored events we should return data for.
 	CorrelatorPagingOptions correlatorPaging = 2;
 }
 
