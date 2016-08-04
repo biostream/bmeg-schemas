@@ -9,11 +9,13 @@ package bmeg.gaea.schema;
 // (0-based).
 // ***Modified from GA4GH to include end position.***
 message Position {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
     // The name of the `Reference` on which the `Position` is located.
     // (e.g. `chr20` or `X`)
-    string chromosome = 2;
+    string chromosome = 4;
 
     // The 0-based offset from the start of the forward strand for that
     // `Reference`. Genomic positions are non-negative integers less than
@@ -24,31 +26,35 @@ message Position {
     // Genomic positions are non-negative integers less than reference length.
     // Variants spanning the join of circular genomes are represented as
     // two variants one on each side of the join (position 0).
-    int64 start = 3;
+    int64 start = 5;
 
     // The end position (exclusive), resulting in [start, end) closed-open
     // interval.
     //
     // For Variantcalls: This is typically calculated by `start + referenceBases.length`.
-    int64 end = 4;
+    int64 end = 6;
 
     // // Strand the position is associated with.
     // Strand strand = 4;
-    string strand = 5;
+    string strand = 7;
 }
 
 // Annotation of a contiguous region of a sequence.
 // An example might be a gene or a protein.
 // For example, a position X might corresponds to gene/Feature TP53.
-message Feature {
-    string name = 1;
+message Gene {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    // position at which this feature occurs (0-based).
-    // Features spanning the join of circular genomes are represented as
-    // two features one on each side of the join (position 0).
+    string symbol = 4;
+    string description = 5;
+    string chromosome = 6;
+    string accession = 7;
+    string refseq = 8;
+    repeated string inFamilyEdges = 9;
+    repeated string citedFromEdges = 10;
 
-    // Data dump/placeholder field.
-    // 
     // Name/value attributes of the annotation.  Attribute names follow the GFF3
     // naming convention of reserved names starting with an upper cases
     // character, and user-define names start with lower-case.  Most GFF3
@@ -56,11 +62,55 @@ message Feature {
     // defined as fields. Additional, the following attributes are added:
     // * Score - the GFF3 score column
     // * Phase - the GFF3 phase column for CDS features.
-    map<string, string> attributes = 4;
+    map<string, string> attributes = 11;
+}
+
+message GeneSynonym {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string symbol = 4;
+    repeated string synonymForEdges = 5;
+    repeated string inDatabaseEdges = 6;
+}
+
+message GeneDatabase {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+}
+
+message GeneFamily {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string tag = 4;
+    string description = 5;
+}
+
+message Pubmed {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string pmid = 4;
+    string title = 5;
+    string abstract = 6;
+    string text = 7;
+    repeated string authorEdges = 8;
+    repeated string citationEdges = 9;
 }
 
 message Domain {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
 }
 
 // How does a particular mutation affect a transcript/protein?
@@ -71,26 +121,29 @@ message Domain {
 //
 // But MUCH simplified.
 message VariantCallEffect {
-    string name = 1;
-    string source = 2;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    // The feature can mean either the gene or the protein this variant is associated with.
-    string variantClassification = 3;
+    string source = 4;
+
+    // The gene can mean either the gene or the protein this variant is associated with.
+    string variantClassification = 5;
 
     // Target: Domain
-    repeated string inDomainEdges = 4;
-    // Target: Feature
-    repeated string inFeatureEdges = 5;
+    repeated string inDomainEdges = 6;
+    // Target: Gene
+    repeated string inGeneEdges = 7;
 
     // Target: VariantCall
-    repeated string effectOfEdges = 6;
+    repeated string effectOfEdges = 8;
 
-    string dbsnpRS = 7;
-    string dbsnpValStatus = 8;
+    string dbsnpRS = 9;
+    string dbsnpValStatus = 10;
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
-    map<string, string> info = 9;
+    map<string, string> info = 11;
 }
 
 // Here, a VariantCall is a combination of the 'Variant' and 'Call'
@@ -100,38 +153,40 @@ message VariantCallEffect {
 // GA4GH is contained within 'CallSet'. Here it is a VariantCall field.
 // Genomic location has been replaced by a 'Position' object.
 message VariantCall {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
     // The source of this data
-    string source = 2;
+    string source = 4;
 
-    string variantType = 3;
+    string variantType = 5;
 
     // The reference bases for this variant. They start at the given start
     // position. e.g. "T"
-    string referenceAllele = 4;
+    string referenceAllele = 6;
 
     // The normal alleles for this sample
-    string normalAllele1 = 5;
-    string normalAllele2 = 6;
+    string normalAllele1 = 7;
+    string normalAllele2 = 8;
 
     // The genotype of this variant call. GA4GH uses int32. Here it is a string.
-    string tumorAllele1 = 7;
-    string tumorAllele2 = 8;
+    string tumorAllele1 = 9;
+    string tumorAllele2 = 10;
 
-    string sequencer = 9;
+    string sequencer = 11;
 
     // where on the genome this variant occurred 
     // Target: Position
-    repeated string atPositionEdges = 10;
+    repeated string atPositionEdges = 12;
 
     // Target: Biosample
-    repeated string tumorSampleEdges = 11;
+    repeated string tumorSampleEdges = 13;
     // Target: Biosample
-    repeated string normalSampleEdges = 12;
+    repeated string normalSampleEdges = 14;
 
-    // A map of additional variant call information, including a Feature Id for now...
-    map<string, string> info = 13;
+    // A map of additional variant call information, including a Gene Id for now...
+    map<string, string> info = 15;
 }
 
 // From GA4GH:
@@ -145,118 +200,132 @@ message VariantCall {
 //   In the context of the GA4GH metadata schema, Biosample constitutes the central
 //   reference object.
 message Biosample {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
     // There is a separate biosample for the tumor and the normal sample,
     // and the variant call represents the difference between them
 
-    // Label or symbolic identifier for the biosample, from the original datasource.
-    string name = 1;
-
     // the source of this data
-    string source = 2;
+    string source = 3;
 
     // original barcode
-    string barcode = 3;
+    string barcode = 4;
 
     // either tumor or normal for now
-    string sampleType = 4;
+    string sampleType = 5;
 
     // Target: Individual
-    repeated string sampleOfEdges = 5;
+    repeated string sampleOfEdges = 6;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
 
 message Individual {
-    // label or symbolic identifier for Individual, from original database.
-    // In the context of TCGA, might be "TCGA-AG-3582" from "barcode" column in summary_patient_metadata_pancan.tsv
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    // the source of this data
-    string source = 2;
+    string source = 4;
 
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 3;
+    map<string, string> observations = 5;
 }
 
 message GeneExpression {
-    string name = 1;
-    string source = 2;
-    string barcode = 3;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string source = 4;
+    string barcode = 5;
 
     // Target: Biosample
-    repeated string expressionForEdges = 4;
+    repeated string expressionForEdges = 6;
 
-    map<string, double> expressions = 5;
+    map<string, double> expressions = 7;
 }
 
 message PhenotypeAssociation {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    // Target: VariantCall Biosample Individual Feature
-    repeated string hasGenotypeEdges = 2;
+    // Target: VariantCall Biosample Individual Gene
+    repeated string hasGenotypeEdges = 4;
 
     // Target: Phenotype
-    repeated string hasPhenotypeEdges = 3;
+    repeated string hasPhenotypeEdges = 5;
 
     // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
     // Target: Drug Evidence
-    repeated string hasContextEdges = 4;
+    repeated string hasContextEdges = 6;
 
     // Additional information about the context
-    map<string, string> info = 5;    
+    map<string, string> info = 7;
 }
 
 message Phenotype {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
     // Target: OntologyTerm
-    repeated string isTypeEdges = 2;
+    repeated string isTypeEdges = 4;
 
-    string description = 3;
+    string description = 5;
 }
 
 message OntologyTerm {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    string term = 2;
-    
-    string source = 3;
+    string term = 4;
+    string source = 5;
 }
 
 message Evidence {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
     // In the future, we might want to turn this field into an edge to a full-fledged Publication object
-    repeated string pmid = 2;
+    repeated string pmid = 4;
 
     // Information about this evidence item
-    map<string, string> info = 3;
+    map<string, string> info = 5;
 }
 
 message Drug {
-    string name = 1;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
     // Each synonym may end up as a node.
-    repeated string synonyms = 2;
+    repeated string synonyms = 4;
 
-    map<string, string> info = 3;
+    map<string, string> info = 5;
 }
 
 message LinearSignature {
-    string name = 1;
-    // Specify what the model predicts, i.e. 'drug response'.
-    string predicts = 2;
-    // Specify what phenotype it predicts, i.e. 'AZD6482'.
-    string phenotype = 3;
-    // Array for quantile normalization.
-    repeated double quantile = 4;
+    string id = 1;
+    string gid = 2;
+    string type = 3;
 
-    double intercept = 5;
-    map<string, double> coefficients = 6;
+    // Specify what the model predicts, i.e. 'drug response'.
+    string predicts = 4;
+    // Specify what phenotype it predicts, i.e. 'AZD6482'.
+    string phenotype = 5;
+    // Array for quantile normalization.
+    repeated double quantile = 6;
+
+    double intercept = 7;
+    map<string, double> coefficients = 8;
    
-    map<string, double> background = 7;
-    repeated string backgroundCohortEdges = 8;
+    map<string, double> background = 9;
+    repeated string backgroundCohortEdges = 10;
 
     // Target: Drug
-    repeated string signatureForEdges = 10;
+    repeated string signatureForEdges = 11;
 }
