@@ -207,16 +207,16 @@ message Biosample {
     // and the variant call represents the difference between them
 
     // the source of this data
-    string source = 3;
+    string source = 4;
 
     // original barcode
-    string barcode = 4;
+    string barcode = 5;
 
     // either tumor or normal for now
-    string sampleType = 5;
+    string sampleType = 6;
 
     // Target: Individual
-    repeated string sampleOfEdges = 6;
+    repeated string sampleOfEdges = 7;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
