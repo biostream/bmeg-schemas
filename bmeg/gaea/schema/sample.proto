@@ -221,6 +221,16 @@ message Biosample {
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
 }
 
+message Cohort {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string description = 4;
+
+    repeated string hasMemberEdges = 4; 
+}
+
 message Individual {
     string id = 1;
     string gid = 2;
