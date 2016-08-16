@@ -37,6 +37,9 @@ message SampleDataForSamplesWithExtremeScoresQuery {
 
 	// return the clinical event data for the samples returned in signatureMetadata
 	repeated EventData.EventMetadata clinicalEventMetadata = 3;
+
+	// return the mutation data for the samples returned in signatureMetadata
+	repeated EventData.EventMetadata mutationMetadata = 4;
 }
 
 // This is the same as ObservationDeckResponse.
@@ -59,7 +62,11 @@ message InferredVariantToSignatureEdgeQuery {
 // We expect to have at least the following: expression, mutation call, and drug sensitivity signature.
 // Might also have copy number, and mutation impact score.
 message InferredVariantToSignatureEdgesResponse {
-	repeated EventData eventData = 1;
+	message ReturnObj{
+		EventData eventData = 1;
+		float significance = 2;
+	}
+	repeated ReturnObj returnObj = 1;
 }
 
 
@@ -82,7 +89,7 @@ message AvailableSignaturesResponse{
 // correlator query
 message correlatorQuery{
 	EventData.EventMetadata pivotEvent = 1;
-	
+
 	// paging tells us how far down the ordered list of scored events we should return data for.
 	CorrelatorPagingOptions correlatorPaging = 2;
 }
@@ -90,14 +97,14 @@ message correlatorQuery{
 // for specifying page of correlator results for each datatype
 message CorrelatorPagingOptions{
 	repeated DatatypePaging datatypePaging = 1;
-	
+
 	message DatatypePaging{
 		string datatype = 1;
 		int32 pageSize = 2;
-		
+
 		// descending from most positive scores
 		int32 selectedTopPage = 3;
-		
+
 		// ascending from most negative scores
 		int32 selectedBottomPage = 4;
 	}
@@ -138,7 +145,7 @@ message EventData {
 		string eventType = 2;
 
 		Datatype datatype = 3;
-		
+
 		// Is SampleData.val to be interpreted as a string, number, or category?
 		enum Datatype {
 			STRING = 0;
@@ -153,7 +160,7 @@ message EventData {
 			string feature = 1;
 			float weight = 2;
 		}
-		
+
 		float correlatorScore = 5;
 	}
 
