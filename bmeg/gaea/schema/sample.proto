@@ -219,6 +219,7 @@ message Biosample {
     repeated string sampleOfEdges = 7;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
+    map<string, string> observations = 8;
 }
 
 message Cohort {
@@ -236,10 +237,11 @@ message Individual {
     string gid = 2;
     string type = 3;
 
-    string source = 4;
+    string barcode = 4;
+    string source = 5;
 
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 5;
+    map<string, string> observations = 6;
 }
 
 message GeneExpression {
