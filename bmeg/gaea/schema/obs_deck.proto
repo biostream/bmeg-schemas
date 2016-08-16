@@ -74,6 +74,26 @@ message InferredVariantToSignatureEdgesResponse {
 // OTHER USEFUL MESSAGES
 //
 
+// query to get available clinical variable names
+message AvailableClinicalVarsQuery{
+}
+
+// response is a list of available clinical variable names
+message AvailableClinicalVarsResponse{
+	repeated string clinicalVarNames = 1;
+}
+
+
+// request clinical data
+message SampleClinicalDataQuery{
+	repeated string clinicalVarNames = 1;
+}
+
+// respond with sample clinical data
+message SampleClinicalDataResponse{
+	repeated EventData eventData = 1;
+}
+
 
 // query for signatures by name
 // If no query was sent, return all signatures
