@@ -229,7 +229,7 @@ message Cohort {
 
     string description = 4;
 
-    repeated string hasMemberEdges = 4; 
+    repeated string hasMemberEdges = 5;
 }
 
 message Individual {
