@@ -16,7 +16,7 @@ message Resource {
     string location = 3;
     string mimeType = 4;
     string checksum = 5;
-    long size = 6;
+    int64 size = 6;
     string datasetID = 7;
     string format = 8;
     string description = 9;
