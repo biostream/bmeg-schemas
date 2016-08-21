@@ -58,5 +58,5 @@ setup(name='bmeg-schemas',
       version='0.1',
       description='BMEG Schema Build',
       url='https://github.com/bmeg/bmeg-schemas',
-      packages=['python/bmeg'],
+      packages=['bmeg'],
      )
