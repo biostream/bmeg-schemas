@@ -238,6 +238,7 @@ message Cohort {
 
     string description = 4;
 
+    // Target: Biosample
     repeated string hasMemberEdges = 5;
 }
 
