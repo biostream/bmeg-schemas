@@ -111,11 +111,11 @@ message correlatorQuery{
 	EventData.EventMetadata pivotEvent = 1;
 
 	// paging tells us how far down the ordered list of scored events we should return data for.
-	CorrelatorPagingOptions correlatorPaging = 2;
+	DataPagingOptions correlatorPaging = 2;
 }
 
 // for specifying page of correlator results for each datatype
-message CorrelatorPagingOptions{
+message DataPagingOptions{
 	repeated DatatypePaging datatypePaging = 1;
 
 	message DatatypePaging{
@@ -138,18 +138,49 @@ message CorrelatorResponse{
 
 // TODO pathway graph query/response
 
+
+// GENERALIZED observation deck sample data query
+
 // request some event data for a list of samples
 message ObservationDeckQuery {
 	// identify the sample set to report
 	repeated string sampleList = 1;
+
 	// identify which events to report
 	repeated EventData.EventMetadata eventList = 2;
+
+	// specify sample selection method
+	SampleSelectionMethod sampleSelectionMethod = 3;
 }
 
 // respond with some event data
 message ObservationDeckResponse {
 	// return event data for the requested sample set
 	repeated EventData eventData = 1;
+}
+
+// ways to select samples to return
+message SampleSelectionMethod {
+	EventData.EventMetadata selectionEvent = 1;
+	SelectionMethod selectionMethod = 2;
+	SamplePagingOptions samplePaging = 3;
+
+	enum SelectionMethod {
+		TOP_BOTTOM = 0;
+		TOP = 1;
+		BOTTOM = 2;
+	}
+}
+
+// selecting samples
+message SamplePagingOptions {
+	int32 pageSize = 1;
+
+	// descending from most positive scores
+	int32 selectedTopPage = 2;
+
+	// ascending from most negative scores
+	int32 selectedBottomPage=3;
 }
 
 // events have metadata and data
