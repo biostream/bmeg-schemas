@@ -52,7 +52,11 @@ message Gene {
     string chromosome = 6;
     string accession = 7;
     string refseq = 8;
+
+    // Target: GeneFamily
     repeated string inFamilyEdges = 9;
+
+    // Target: PubMed
     repeated string citedFromEdges = 10;
 
     // Name/value attributes of the annotation.  Attribute names follow the GFF3
@@ -71,7 +75,11 @@ message GeneSynonym {
     string type = 3;
 
     string symbol = 4;
+
+    // Target: Gene
     repeated string synonymForEdges = 5;
+
+    // Target: Database
     repeated string inDatabaseEdges = 6;
 }
 
@@ -101,6 +109,7 @@ message Pubmed {
     string title = 5;
     string abstract = 6;
     string text = 7;
+
     repeated string authorEdges = 8;
     repeated string citationEdges = 9;
 }
