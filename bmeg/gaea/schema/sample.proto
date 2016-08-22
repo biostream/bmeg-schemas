@@ -56,7 +56,7 @@ message Gene {
     // Target: GeneFamily
     repeated string inFamilyEdges = 9;
 
-    // Target: PubMed
+    // Target: Pubmed
     repeated string citedFromEdges = 10;
 
     // Name/value attributes of the annotation.  Attribute names follow the GFF3
@@ -79,7 +79,7 @@ message GeneSynonym {
     // Target: Gene
     repeated string synonymForEdges = 5;
 
-    // Target: Database
+    // Target: GeneDatabase
     repeated string inDatabaseEdges = 6;
 }
 
