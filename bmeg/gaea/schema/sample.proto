@@ -141,6 +141,7 @@ message VariantCallEffect {
 
     // Target: Domain
     repeated string inDomainEdges = 6;
+
     // Target: Gene
     repeated string inGeneEdges = 7;
 
@@ -191,6 +192,7 @@ message VariantCall {
 
     // Target: Biosample
     repeated string tumorSampleEdges = 13;
+
     // Target: Biosample
     repeated string normalSampleEdges = 14;
 
