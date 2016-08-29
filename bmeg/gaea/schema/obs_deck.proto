@@ -65,8 +65,25 @@ message InferredVariantToSignatureEdgesResponse {
 	message ReturnObj{
 		EventData eventData = 1;
 		float significance = 2;
+		SampleGroupDetails sampleGroupDetails = 3;
+		SampleGroupDetails backgroundGroupdDetails = 4;
 	}
 	repeated ReturnObj returnObj = 1;
+}
+
+// some basic details about a sample group
+message SampleGroupDetails {
+	int32 size = 1;
+	Quartiles quartiles = 2;
+}
+
+// information for calculating data range and interquartile range
+message Quartiles {
+	float minimum = 1;
+	float first = 2;
+	float second = 3;
+	float third = 4;
+	float maximum = 5;
 }
 
 
