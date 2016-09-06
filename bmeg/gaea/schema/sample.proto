@@ -252,8 +252,10 @@ message Individual {
     string barcode = 4;
     string source = 5;
 
+    string tumorSite = 6;
+
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 6;
+    map<string, string> observations = 7;
 }
 
 message GeneExpression {
