@@ -66,7 +66,7 @@ message Gene {
     // defined as fields. Additional, the following attributes are added:
     // * Score - the GFF3 score column
     // * Phase - the GFF3 phase column for CDS features.
-    map<string, string> attributes = 11;
+    map<string, string> attributesProperties = 11;
 }
 
 message GeneSynonym {
@@ -153,7 +153,7 @@ message VariantCallEffect {
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
-    map<string, string> info = 11;
+    map<string, string> infoProperties = 11;
 }
 
 // Here, a VariantCall is a combination of the 'Variant' and 'Call'
@@ -197,7 +197,7 @@ message VariantCall {
     repeated string normalSampleEdges = 14;
 
     // A map of additional variant call information, including a Gene Id for now...
-    map<string, string> info = 15;
+    map<string, string> infoProperties = 15;
 }
 
 // From GA4GH:
@@ -230,7 +230,7 @@ message Biosample {
     repeated string sampleOfEdges = 7;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
-    map<string, string> observations = 8;
+    map<string, string> observationsProperties = 8;
 }
 
 message Cohort {
@@ -255,7 +255,7 @@ message Individual {
     string tumorSite = 6;
 
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 7;
+    map<string, string> observationsProperties = 7;
 }
 
 message GeneExpression {
@@ -288,7 +288,7 @@ message PhenotypeAssociation {
     repeated string hasContextEdges = 6;
 
     // Additional information about the context
-    map<string, string> info = 7;
+    map<string, string> infoProperties = 7;
 }
 
 message Phenotype {
@@ -320,7 +320,7 @@ message Evidence {
     repeated string pmid = 4;
 
     // Information about this evidence item
-    map<string, string> info = 5;
+    map<string, string> infoProperties = 5;
 }
 
 message Drug {
@@ -331,7 +331,7 @@ message Drug {
     // Each synonym may end up as a node.
     repeated string synonyms = 4;
 
-    map<string, string> info = 5;
+    map<string, string> infoProperties = 5;
 }
 
 message LinearSignature {
