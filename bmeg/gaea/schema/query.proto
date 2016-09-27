@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bmeg.gaea.schema.query
+package bmeg.gaea.schema.query;
 
 message GraphQuery {
     repeated GraphStatement statements = 1;
@@ -26,7 +26,11 @@ message VertexStatement {
 }
 
 message HasStatement {
-    map<string, repeated string> has = 1;
+    message WithinStatement {
+        repeated string within = 1;
+    }
+
+    map<string, WithinStatement> has = 1;
 }
 
 message AsStatement {
