@@ -8,59 +8,23 @@ message GraphQuery {
 
 message GraphStatement {
     oneof statement {
-        VertexStatement statement = 1;
-        HasStatement statement = 2;
-        AsStatement statement = 3;
-        InStatement statement = 4;
-        OutStatement statement = 5;
-        InEdgeStatement statement = 6;
-        OutEdgeStatement statement = 7;
-        InVertexStatement statement = 8;
-        OutVertexStatement statement = 9;
-        SelectStatement statement = 10;
+        string vertex = 1;
+        map<string, WithinStatement> has = 1;
+        string as = 3;
+        string in = 4;
+        string out = 5;
+        string inEdge = 6;
+        string outEdge = 7;
+        string inVertex = 8;
+        string outVertex = 9;
+        SelectStatement select = 10;
     }
 }
 
-message VertexStatement {
-    string vertex = 1;
-}
-
-message HasStatement {
-    message WithinStatement {
-        repeated string within = 1;
-    }
-
-    map<string, WithinStatement> has = 1;
-}
-
-message AsStatement {
-    string as = 1;
-}
-
-message InStatement {
-    string in = 1;
-}
-
-message OutStatement {
-    string out = 1;
-}
-
-message InEdgeStatement {
-    string inEdge = 1;
-}
-
-message OutEdgeStatement {
-    string outEdge = 1;
-}
-
-message InVertexStatement {
-    string inVertex = 1;
-}
-
-message OutVertexStatement {
-    string outVertex = 1;
+message WithinStatement {
+    repeated string within = 1;
 }
 
 message SelectStatement {
-    repeated string select = 1;
+    repeated string steps = 1;
 }
