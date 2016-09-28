@@ -26,7 +26,7 @@ message HasStatement {
         repeated string within = 1;
     }
     
-    map<string, WithinStatement> properties;
+    map<string, WithinStatement> properties = 1;
 }
 
 message SelectStatement {
