@@ -233,17 +233,6 @@ message Biosample {
     map<string, string> observationsProperties = 8;
 }
 
-message Cohort {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
-
-    string description = 4;
-
-    // Target: Biosample
-    repeated string hasMemberEdges = 5;
-}
-
 message Individual {
     string id = 1;
     string gid = 2;
@@ -270,6 +259,66 @@ message GeneExpression {
     repeated string expressionForEdges = 6;
 
     map<string, double> expressions = 7;
+}
+
+message Cohort {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+    string location = 5;
+    string description = 6;
+
+    // Target: Biosample
+    repeated string hasMemberEdges = 7;
+    repeated string hasSampleEdges = 8;
+    repeated string hasMatrixEdges = 9;
+}
+
+message DoubleVector {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    map<string, double> values = 4;
+}
+
+message CohortMatrix {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string method = 4;
+
+    repeated string hasVectorEdges = 5;
+    repeated string hasKeyspaceEdges = 6;
+}
+
+message Keyspace {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+    repeated string keys = 5;
+}
+
+message MatrixVectorEdge {
+    string type = 1;
+
+    string in = 2;
+    string out = 3;
+    string rowName = 4;
+}
+
+message MatrixAnalysis {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    repeated string sourceMatrixEdges = 4;
+    repeated string resultMatrixEdges = 5;
 }
 
 message PhenotypeAssociation {
@@ -355,3 +404,13 @@ message LinearSignature {
     // Target: Drug
     repeated string signatureForEdges = 11;
 }
+
+message SignatureExpressionEdge {
+    string type = 1;
+
+    string in = 2;
+    string out = 3;
+    double level = 4;
+}
+
+
