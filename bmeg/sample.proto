@@ -52,7 +52,11 @@ message Gene {
     string chromosome = 6;
     string accession = 7;
     string refseq = 8;
+
+    // Target: GeneFamily
     repeated string inFamilyEdges = 9;
+
+    // Target: Pubmed
     repeated string citedFromEdges = 10;
 
     // Name/value attributes of the annotation.  Attribute names follow the GFF3
@@ -62,7 +66,7 @@ message Gene {
     // defined as fields. Additional, the following attributes are added:
     // * Score - the GFF3 score column
     // * Phase - the GFF3 phase column for CDS features.
-    map<string, string> attributes = 11;
+    map<string, string> attributesProperties = 11;
 }
 
 message GeneSynonym {
@@ -71,7 +75,11 @@ message GeneSynonym {
     string type = 3;
 
     string symbol = 4;
+
+    // Target: Gene
     repeated string synonymForEdges = 5;
+
+    // Target: GeneDatabase
     repeated string inDatabaseEdges = 6;
 }
 
@@ -101,6 +109,7 @@ message Pubmed {
     string title = 5;
     string abstract = 6;
     string text = 7;
+
     repeated string authorEdges = 8;
     repeated string citationEdges = 9;
 }
@@ -132,6 +141,7 @@ message VariantCallEffect {
 
     // Target: Domain
     repeated string inDomainEdges = 6;
+
     // Target: Gene
     repeated string inGeneEdges = 7;
 
@@ -143,7 +153,7 @@ message VariantCallEffect {
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
-    map<string, string> info = 11;
+    map<string, string> infoProperties = 11;
 }
 
 // Here, a VariantCall is a combination of the 'Variant' and 'Call'
@@ -182,11 +192,12 @@ message VariantCall {
 
     // Target: Biosample
     repeated string tumorSampleEdges = 13;
+
     // Target: Biosample
     repeated string normalSampleEdges = 14;
 
     // A map of additional variant call information, including a Gene Id for now...
-    map<string, string> info = 15;
+    map<string, string> infoProperties = 15;
 }
 
 // From GA4GH:
@@ -219,17 +230,7 @@ message Biosample {
     repeated string sampleOfEdges = 7;
 
     // When necessary, some way to add Biosample observations might be nice, like: map<string, sring> observations = 4;
-    map<string, string> observations = 8;
-}
-
-message Cohort {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
-
-    string description = 4;
-
-    repeated string hasMemberEdges = 5;
+    map<string, string> observationsProperties = 8;
 }
 
 message Individual {
@@ -240,8 +241,10 @@ message Individual {
     string barcode = 4;
     string source = 5;
 
+    string tumorSite = 6;
+
     // placeholder data dump of remaining 591 columns in summary_patient_metadata_pancan.tsv
-    map<string, string> observations = 6;
+    map<string, string> observationsProperties = 7;
 }
 
 message GeneExpression {
@@ -256,6 +259,66 @@ message GeneExpression {
     repeated string expressionForEdges = 6;
 
     map<string, double> expressions = 7;
+}
+
+message Cohort {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+    string location = 5;
+    string description = 6;
+
+    // Target: Biosample
+    repeated string hasMemberEdges = 7;
+    repeated string hasSampleEdges = 8;
+    repeated string hasMatrixEdges = 9;
+}
+
+message DoubleVector {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    map<string, double> values = 4;
+}
+
+message CohortMatrix {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string method = 4;
+
+    repeated string hasVectorEdges = 5;
+    repeated string hasKeyspaceEdges = 6;
+}
+
+message Keyspace {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+    repeated string keys = 5;
+}
+
+message MatrixVectorEdge {
+    string type = 1;
+
+    string in = 2;
+    string out = 3;
+    string rowName = 4;
+}
+
+message MatrixAnalysis {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    repeated string sourceMatrixEdges = 4;
+    repeated string resultMatrixEdges = 5;
 }
 
 message PhenotypeAssociation {
@@ -274,7 +337,7 @@ message PhenotypeAssociation {
     repeated string hasContextEdges = 6;
 
     // Additional information about the context
-    map<string, string> info = 7;
+    map<string, string> infoProperties = 7;
 }
 
 message Phenotype {
@@ -306,7 +369,7 @@ message Evidence {
     repeated string pmid = 4;
 
     // Information about this evidence item
-    map<string, string> info = 5;
+    map<string, string> infoProperties = 5;
 }
 
 message Drug {
@@ -317,7 +380,7 @@ message Drug {
     // Each synonym may end up as a node.
     repeated string synonyms = 4;
 
-    map<string, string> info = 5;
+    map<string, string> infoProperties = 5;
 }
 
 message LinearSignature {
@@ -341,3 +404,13 @@ message LinearSignature {
     // Target: Drug
     repeated string signatureForEdges = 11;
 }
+
+message SignatureExpressionEdge {
+    string type = 1;
+
+    string in = 2;
+    string out = 3;
+    double level = 4;
+}
+
+
