@@ -1,20 +1,6 @@
 syntax = "proto3";
 
-package bmeg.schema;
-
-message Pubmed {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
-
-    string pmid = 4;
-    string title = 5;
-    string abstract = 6;
-    string text = 7;
-
-    repeated string authorEdges = 8;
-    repeated string citationEdges = 9;
-}
+package bmeg.sample;
 
 message Domain {
     string id = 1;
