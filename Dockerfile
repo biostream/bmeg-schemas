@@ -5,5 +5,5 @@ WORKDIR /opt
 RUN git clone https://github.com/google/protobuf.git && cd protobuf && ./autogen.sh && ./configure && make && make install
 RUN ldconfig
 RUN pip install protobuf
-RUN pip install git+https://github.com/bmeg/bmeg-schemas.git@packaging
+RUN pip install git+https://github.com/bmeg/bmeg-schemas.git
 
