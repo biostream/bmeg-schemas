@@ -1,0 +1,37 @@
+
+syntax = "proto3";
+
+package bmeg.ml;
+
+
+message LinearSignature {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // Specify what the model predicts, i.e. 'drug response'.
+    string predicts = 4;
+    // Specify what phenotype it predicts, i.e. 'AZD6482'.
+    string phenotype = 5;
+    // Array for quantile normalization.
+    repeated double quantile = 6;
+
+    double intercept = 7;
+    map<string, double> coefficients = 8;
+   
+    map<string, double> background = 9;
+    repeated string backgroundCohortEdges = 10;
+
+    // Target: Drug
+    repeated string signatureForEdges = 11;
+}
+
+message SignatureExpressionEdge {
+    string type = 1;
+
+    string in = 2;
+    string out = 3;
+    double level = 4;
+}
+
+

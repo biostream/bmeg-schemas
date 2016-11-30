@@ -1,0 +1,82 @@
+
+syntax = "proto3";
+
+package bmeg.phenotype;
+
+message PhenotypeAssociation {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // Target: VariantCall Biosample Individual Gene
+    repeated string hasGenotypeEdges = 4;
+
+    // Target: Phenotype
+    repeated string hasPhenotypeEdges = 5;
+
+    // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
+    // Target: Drug Evidence
+    repeated string hasContextEdges = 6;
+}
+
+message Phenotype {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // Target: OntologyTerm
+    repeated string isTypeEdges = 4;
+
+    string description = 5;
+}
+
+message OntologyTerm {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string term = 4;
+    string source = 5;
+}
+
+message Evidence {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // In the future, we might want to turn this field into an edge to a full-fledged Publication object
+    repeated string pmid = 4;
+
+    // Information about this evidence item
+    map<string, string> infoProperties = 5;
+}
+
+message Drug {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // Each synonym may end up as a node.
+    repeated string synonyms = 4;
+
+    map<string, string> infoProperties = 5;
+}
+
+message DoseResponse {
+  double dose = 1;
+  double response = 2;
+}
+
+message ResponseCurve {
+    enum ResponseType {
+      UNKNOWN = 0;
+      GROWTH = 1;
+      ACTIVITY = 2;
+    }
+    string gid = 1;
+    ResponseType responseType = 2;
+    repeated DoseResponse values = 3;
+    double growthStandard = 4;
+    repeated string compoundEdges = 5;
+    repeated string sampleEdges = 6;
+}

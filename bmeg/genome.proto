@@ -1,0 +1,100 @@
+
+syntax = "proto3";
+
+package bmeg.genome;
+
+// A `Position` is one or more (consecutive***) bases in some `Reference`. A `Position` is
+// represented by a `Reference` name, and a base number on that `Reference`
+// (0-based).
+// ***Modified from GA4GH to include end position.***
+message Position {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // The name of the `Reference` on which the `Position` is located.
+    // (e.g. `chr20` or `X`)
+    string chromosome = 4;
+
+    // The 0-based offset from the start of the forward strand for that
+    // `Reference`. Genomic positions are non-negative integers less than
+    // `Reference` length.
+    //
+    // For Variant Calls: The start position at which this variant occurs (0-based).
+    // This corresponds to the first base of the string of reference bases.
+    // Genomic positions are non-negative integers less than reference length.
+    // Variants spanning the join of circular genomes are represented as
+    // two variants one on each side of the join (position 0).
+    int64 start = 5;
+
+    // The end position (exclusive), resulting in [start, end) closed-open
+    // interval.
+    //
+    // For Variantcalls: This is typically calculated by `start + referenceBases.length`.
+    int64 end = 6;
+
+    // // Strand the position is associated with.
+    // Strand strand = 4;
+    string strand = 7;
+}
+
+// Annotation of a contiguous region of a sequence.
+// An example might be a gene or a protein.
+// For example, a position X might corresponds to gene/Feature TP53.
+message Gene {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string symbol = 4;
+    string description = 5;
+    string chromosome = 6;
+    string accession = 7;
+    string refseq = 8;
+
+    // Target: GeneFamily
+    repeated string inFamilyEdges = 9;
+
+    // Target: Pubmed
+    repeated string citedFromEdges = 10;
+
+    // Name/value attributes of the annotation.  Attribute names follow the GFF3
+    // naming convention of reserved names starting with an upper cases
+    // character, and user-define names start with lower-case.  Most GFF3
+    // pre-defined attributes apply, the exceptions are ID and Parent, which are
+    // defined as fields. Additional, the following attributes are added:
+    // * Score - the GFF3 score column
+    // * Phase - the GFF3 phase column for CDS features.
+    map<string, string> attributesProperties = 11;
+}
+
+message GeneSynonym {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string symbol = 4;
+
+    // Target: Gene
+    repeated string synonymForEdges = 5;
+
+    // Target: GeneDatabase
+    repeated string inDatabaseEdges = 6;
+}
+
+message GeneDatabase {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+}
+
+message GeneFamily {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string tag = 4;
+    string description = 5;
+}

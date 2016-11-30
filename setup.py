@@ -1,6 +1,7 @@
 
 import os
 import sys
+from glob import glob
 from distutils.core import setup
 import subprocess
 from distutils.spawn import find_executable
@@ -52,7 +53,9 @@ def generate_proto(source, require = True):
     if subprocess.call(protoc_command) != 0:
       sys.exit(-1)
 
-generate_proto("bmeg/sample.proto")
+
+for a in glob("bmeg/*.proto"):
+    generate_proto(a)
 
 setup(name='bmeg-schemas',
       version='0.1',

@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package bmeg.schema;
+
+
+// How does a particular mutation affect a transcript/protein?
+// 
+// VariantCallEffect is most similar to the TranscriptEffect,
+// VariantAnnotation, and HGVSAnnotation concepts in 
+// https://github.com/ga4gh/schemas/blob/variation_annotation/src/main/resources/avro/alleleAnnotations.avdl
+//
+// But MUCH simplified.
+message VariantCallEffect {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string source = 4;
+
+    // The gene can mean either the gene or the protein this variant is associated with.
+    string variantClassification = 5;
+
+    // Target: Domain
+    repeated string inDomainEdges = 6;
+
+    // Target: Gene
+    repeated string inGeneEdges = 7;
+
+    // Target: VariantCall
+    repeated string effectOfEdges = 8;
+
+    string dbsnpRS = 9;
+    string dbsnpValStatus = 10;
+
+    // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
+    // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
+    map<string, string> infoProperties = 11;
+}
+
+// Here, a VariantCall is a combination of the 'Variant' and 'Call'
+// types in GA4GH. Therefore it contains information about 1) genomic location
+// (reserved for 'Variant' in GA4GH) and 2) a particular sample's genotype at that
+// location (reserved for `Call` in GA4GH). Sample-id in
+// GA4GH is contained within 'CallSet'. Here it is a VariantCall field.
+// Genomic location has been replaced by a 'Position' object.
+message VariantCall {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    // The source of this data
+    string source = 4;
+
+    string variantType = 5;
+
+    // The reference bases for this variant. They start at the given start
+    // position. e.g. "T"
+    string referenceAllele = 6;
+
+    // The normal alleles for this sample
+    string normalAllele1 = 7;
+    string normalAllele2 = 8;
+
+    // The genotype of this variant call. GA4GH uses int32. Here it is a string.
+    string tumorAllele1 = 9;
+    string tumorAllele2 = 10;
+
+    string sequencer = 11;
+
+    // where on the genome this variant occurred 
+    // Target: Position
+    repeated string atPositionEdges = 12;
+
+    // Target: Biosample
+    repeated string tumorSampleEdges = 13;
+
+    // Target: Biosample
+    repeated string normalSampleEdges = 14;
+
+    // A map of additional variant call information, including a Gene Id for now...
+    map<string, string> infoProperties = 15;
+}
