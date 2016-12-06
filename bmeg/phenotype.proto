@@ -77,6 +77,6 @@ message ResponseCurve {
     ResponseType responseType = 2;
     repeated DoseResponse values = 3;
     double growthStandard = 4;
-    repeated string compoundEdges = 5;
-    repeated string sampleEdges = 6;
+    string compound = 5;
+    string sample = 6;
 }
