@@ -3,6 +3,16 @@ syntax = "proto3";
 package bmeg.schema;
 
 
+
+message Domain {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+}
+
+
 // How does a particular mutation affect a transcript/protein?
 // 
 // VariantCallEffect is most similar to the TranscriptEffect,

@@ -22,9 +22,7 @@ else:
   protoc = find_executable("protoc")
 
 
-
-
-def generate_proto(source, require = True):
+def generate_proto(source, dest, include=".", require = True):
   """Invokes the Protocol Compiler to generate a _pb2.py from the given
   .proto file.  Does nothing if the output already exists and is newer than
   the input."""
@@ -49,17 +47,19 @@ def generate_proto(source, require = True):
           "or install the binary package.\n")
       sys.exit(-1)
 
-    protoc_command = [ protoc, "-I.", "--python_out=."  , source ]
-    if subprocess.call(protoc_command) != 0:
+    protoc_command = [ protoc, "-I.", "-I%s" % (include), "--python_out=%s" % (os.path.abspath(dest))  , os.path.basename(source) ]
+    if subprocess.call(protoc_command, cwd=os.path.dirname(source)) != 0:
       sys.exit(-1)
 
 
-for a in glob("bmeg/*.proto"):
-    generate_proto(a)
+for a in glob("schema/*.proto"):
+    generate_proto(a, "bmeg")
+
+generate_proto("ga4gh/src/main/proto/ga4gh/bio_metadata.proto", "bmeg/ga4gh", include="../")
 
 setup(name='bmeg-schemas',
       version='0.1',
       description='BMEG Schema Build',
       url='https://github.com/bmeg/bmeg-schemas',
-      packages=['bmeg'],
+      packages=['bmeg', 'bmeg.ga4gh'],
      )
