@@ -8,10 +8,10 @@ message GeneExpression {
     string type = 3;
 
     string source = 4;
-    string barcode = 5;
+    repeated string alias = 5;
 
     // Target: Biosample
-    repeated string expressionForEdges = 6;
+    string bio_sample_id = 6;
 
     map<string, double> expressions = 7;
 }

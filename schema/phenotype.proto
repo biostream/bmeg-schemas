@@ -51,7 +51,7 @@ message Evidence {
     map<string, string> infoProperties = 5;
 }
 
-message Drug {
+message Compound {
     string id = 1;
     string gid = 2;
     string type = 3;
@@ -67,6 +67,19 @@ message DoseResponse {
   double response = 2;
 }
 
+message ResponseSummary {
+  enum SummaryType {
+    UNKNOWN = 0;
+    EC50 = 1;
+    IC50 = 2;
+    LD50 = 3;
+    GR50 = 4;
+  }
+  SummaryType type = 1;
+  double value = 2;
+  string unit = 3;
+}
+
 message ResponseCurve {
     enum ResponseType {
       UNKNOWN = 0;
@@ -79,4 +92,5 @@ message ResponseCurve {
     double growthStandard = 4;
     string compound = 5;
     string sample = 6;
+    repeated ResponseSummary summary = 7; 
 }

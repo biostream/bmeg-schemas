@@ -55,11 +55,17 @@ def generate_proto(source, dest, include=".", require = True):
 for a in glob("schema/*.proto"):
     generate_proto(a, "bmeg")
 
-generate_proto("ga4gh/src/main/proto/ga4gh/bio_metadata.proto", "bmeg/ga4gh", include="../")
+generate_proto("ga4gh_schema/src/main/proto/ga4gh/bio_metadata.proto", "ga4gh", include="../")
+generate_proto("ga4gh_schema/src/main/proto/ga4gh/metadata.proto", "ga4gh", include="../")
+generate_proto("ga4gh_schema/src/main/proto/ga4gh/variants.proto", "ga4gh", include="../")
+generate_proto("ga4gh_schema/src/main/proto/ga4gh/allele_annotations.proto", "ga4gh", include="../")
+generate_proto("ga4gh_schema/src/main/proto/ga4gh/assay_metadata.proto", "ga4gh", include="../")
+
+
 
 setup(name='bmeg-schemas',
       version='0.1',
       description='BMEG Schema Build',
       url='https://github.com/bmeg/bmeg-schemas',
-      packages=['bmeg', 'bmeg.ga4gh'],
+      packages=['bmeg', 'ga4gh'],
      )
