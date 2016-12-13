@@ -1,3 +1,6 @@
+[submodule "ga4gh"]
+        path = ga4gh
+        url = https://github.com/ga4gh/schemas.git
 [submodule "ga4gh_schema"]
 	path = ga4gh_schema
 	url = https://github.com/ga4gh/schemas.git
