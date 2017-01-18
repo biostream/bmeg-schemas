@@ -58,8 +58,8 @@ message Compound {
 
     // Each synonym may end up as a node.
     repeated string synonyms = 4;
-
-    map<string, string> infoProperties = 5;
+    string smiles = 5;
+    map<string, string> infoProperties = 6;
 }
 
 message DoseResponse {
