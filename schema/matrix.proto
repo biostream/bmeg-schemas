@@ -11,7 +11,7 @@ message GeneExpression {
     repeated string alias = 5;
 
     // Target: Biosample
-    string bio_sample_id = 6;
+    string biosample_id = 6;
 
     map<string, double> expressions = 7;
 }

@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 
 package bmeg.phenotype;
@@ -56,38 +55,42 @@ message Compound {
     string gid = 2;
     string type = 3;
 
+    string name = 4;
+
     // Each synonym may end up as a node.
-    repeated string synonyms = 4;
-    string smiles = 5;
-    map<string, string> infoProperties = 6;
+    repeated string synonyms = 5;
+    string smiles = 6;
+    map<string, string> infoProperties = 7;
 }
 
 message DoseResponse {
-  double dose = 1;
-  double response = 2;
+    double dose = 1;
+    double response = 2;
 }
 
 message ResponseSummary {
-  enum SummaryType {
-    UNKNOWN = 0;
-    EC50 = 1;
-    IC50 = 2;
-    LD50 = 3;
-    GR50 = 4;
-    AMAX = 5;
-    ACTIVITY_AREA = 6;
-  }
-  SummaryType type = 1;
-  double value = 2;
-  string unit = 3;
+    enum SummaryType {
+        UNKNOWN = 0;
+        EC50 = 1;
+        IC50 = 2;
+        LD50 = 3;
+        GR50 = 4;
+        AMAX = 5;
+        ACTIVITY_AREA = 6;
+    }
+
+    SummaryType type = 1;
+    double value = 2;
+    string unit = 3;
 }
 
 message ResponseCurve {
     enum ResponseType {
-      UNKNOWN = 0;
-      GROWTH = 1;
-      ACTIVITY = 2;
+        UNKNOWN = 0;
+        GROWTH = 1;
+        ACTIVITY = 2;
     }
+
     string gid = 1;
     ResponseType responseType = 2;
     repeated DoseResponse values = 3;
