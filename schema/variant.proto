@@ -44,7 +44,7 @@ message VariantCallEffect {
 
     // For now, a placeholder field/data dump of maf file fields such as trvType, cPosition, and aminoAcidChange
     // (Might want to consider stealing HGVS annotation data structure from GA4GH for latter two)
-    map<string, string> infoProperties = 11;
+    map<string, string> info = 11;
 }
 
 // Here, a VariantCall is a combination of the 'Variant' and 'Call'
@@ -88,5 +88,5 @@ message VariantCall {
     repeated string normalSample = 14;
 
     // A map of additional variant call information, including a Gene Id for now...
-    map<string, string> infoProperties = 15;
+    map<string, string> info = 15;
 }

@@ -65,7 +65,7 @@ message Gene {
     // defined as fields. Additional, the following attributes are added:
     // * Score - the GFF3 score column
     // * Phase - the GFF3 phase column for CDS features.
-    map<string, string> attributesProperties = 11;
+    map<string, string> info = 11;
 }
 
 message GeneSynonym {

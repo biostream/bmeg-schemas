@@ -47,7 +47,7 @@ message Evidence {
     repeated string pmid = 4;
 
     // Information about this evidence item
-    map<string, string> infoProperties = 5;
+    map<string, string> info = 5;
 }
 
 message Compound {
@@ -60,7 +60,7 @@ message Compound {
     // Each synonym may end up as a node.
     repeated string synonyms = 5;
     string smiles = 6;
-    map<string, string> infoProperties = 7;
+    map<string, string> info = 7;
 }
 
 message DoseResponse {
