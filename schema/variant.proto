@@ -31,13 +31,13 @@ message VariantCallEffect {
     string variantClassification = 5;
 
     // Target: Domain
-    repeated string inDomainEdges = 6;
+    repeated string inDomain = 6;
 
     // Target: Gene
-    repeated string inGeneEdges = 7;
+    repeated string inGene = 7;
 
     // Target: VariantCall
-    repeated string effectOfEdges = 8;
+    repeated string effectOf = 8;
 
     string dbsnpRS = 9;
     string dbsnpValStatus = 10;
@@ -79,13 +79,13 @@ message VariantCall {
 
     // where on the genome this variant occurred 
     // Target: Position
-    repeated string atPositionEdges = 12;
+    repeated string atPosition = 12;
 
     // Target: Biosample
-    repeated string tumorSampleEdges = 13;
+    repeated string tumorSample = 13;
 
     // Target: Biosample
-    repeated string normalSampleEdges = 14;
+    repeated string normalSample = 14;
 
     // A map of additional variant call information, including a Gene Id for now...
     map<string, string> infoProperties = 15;

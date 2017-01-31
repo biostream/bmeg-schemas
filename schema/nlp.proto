@@ -12,6 +12,6 @@ message Pubmed {
     string abstract = 6;
     string text = 7;
 
-    repeated string authorEdges = 8;
-    repeated string citationEdges = 9;
+    repeated string author = 8;
+    repeated string citation = 9;
 }

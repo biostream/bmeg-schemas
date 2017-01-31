@@ -8,14 +8,14 @@ message PhenotypeAssociation {
     string type = 3;
 
     // Target: VariantCall Biosample Individual Gene
-    repeated string hasGenotypeEdges = 4;
+    repeated string hasGenotype = 4;
 
     // Target: Phenotype
-    repeated string hasPhenotypeEdges = 5;
+    repeated string hasPhenotype = 5;
 
     // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
     // Target: Drug Evidence
-    repeated string hasContextEdges = 6;
+    repeated string hasContext = 6;
 }
 
 message Phenotype {
@@ -24,7 +24,7 @@ message Phenotype {
     string type = 3;
 
     // Target: OntologyTerm
-    repeated string isTypeEdges = 4;
+    repeated string isType = 4;
 
     string description = 5;
 }

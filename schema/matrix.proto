@@ -26,9 +26,9 @@ message Cohort {
     string description = 6;
 
     // Target: Biosample
-    repeated string hasMemberEdges = 7;
-    repeated string hasSampleEdges = 8;
-    repeated string hasMatrixEdges = 9;
+    repeated string hasMember = 7;
+    repeated string hasSample = 8;
+    repeated string hasMatrix = 9;
 }
 
 message DoubleVector {
@@ -46,8 +46,8 @@ message CohortMatrix {
 
     string method = 4;
 
-    repeated string hasVectorEdges = 5;
-    repeated string hasKeyspaceEdges = 6;
+    repeated string hasVector = 5;
+    repeated string hasKeyspace = 6;
 }
 
 message Keyspace {
@@ -72,6 +72,6 @@ message MatrixAnalysis {
     string gid = 2;
     string type = 3;
 
-    repeated string sourceMatrixEdges = 4;
-    repeated string resultMatrixEdges = 5;
+    repeated string sourceMatrix = 4;
+    repeated string resultMatrix = 5;
 }

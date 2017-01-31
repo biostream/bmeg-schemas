@@ -53,10 +53,10 @@ message Gene {
     string refseq = 8;
 
     // Target: GeneFamily
-    repeated string inFamilyEdges = 9;
+    repeated string inFamily = 9;
 
     // Target: Pubmed
-    repeated string citedFromEdges = 10;
+    repeated string citedFrom = 10;
 
     // Name/value attributes of the annotation.  Attribute names follow the GFF3
     // naming convention of reserved names starting with an upper cases
@@ -76,10 +76,10 @@ message GeneSynonym {
     string symbol = 4;
 
     // Target: Gene
-    repeated string synonymForEdges = 5;
+    repeated string synonymFor = 5;
 
     // Target: GeneDatabase
-    repeated string inDatabaseEdges = 6;
+    repeated string inDatabase = 6;
 }
 
 message GeneDatabase {

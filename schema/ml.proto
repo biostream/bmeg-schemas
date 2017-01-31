@@ -20,10 +20,10 @@ message LinearSignature {
     map<string, double> coefficients = 8;
    
     map<string, double> background = 9;
-    repeated string backgroundCohortEdges = 10;
+    repeated string backgroundCohort = 10;
 
     // Target: Drug
-    repeated string signatureForEdges = 11;
+    repeated string signatureFor = 11;
 }
 
 message SignatureExpressionEdge {
