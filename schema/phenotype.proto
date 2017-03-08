@@ -3,99 +3,100 @@ syntax = "proto3";
 package bmeg.phenotype;
 
 message PhenotypeAssociation {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+  string id = 1;
+  string gid = 2;
+  string type = 3;
 
-    // Target: VariantCall Biosample Individual Gene
-    repeated string hasGenotype = 4;
+  // Target: VariantCall Biosample Individual Gene
+  repeated string hasGenotype = 4;
 
-    // Target: Phenotype
-    repeated string hasPhenotype = 5;
+  // Target: Phenotype
+  repeated string hasPhenotype = 5;
 
-    // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
-    // Target: Drug Evidence
-    repeated string hasContext = 6;
+  // The context is unique to the PhenotypeAssociation. Could involve Drug or Evidence.
+  // Target: Drug Evidence
+  repeated string hasContext = 6;
 }
 
 message Phenotype {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+  string id = 1;
+  string gid = 2;
+  string type = 3;
 
-    // Target: OntologyTerm
-    repeated string isType = 4;
+  // Target: OntologyTerm
+  repeated string isType = 4;
 
-    string description = 5;
+  string description = 5;
 }
 
 message OntologyTerm {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+  string id = 1;
+  string gid = 2;
+  string type = 3;
 
-    string term = 4;
-    string source = 5;
+  string term = 4;
+  string source = 5;
 }
 
 message Evidence {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+  string id = 1;
+  string gid = 2;
+  string type = 3;
 
-    // In the future, we might want to turn this field into an edge to a full-fledged Publication object
-    repeated string pmid = 4;
+  // In the future, we might want to turn this field into an edge to a full-fledged Publication object
+  repeated string pmid = 4;
 
-    // Information about this evidence item
-    map<string, string> info = 5;
+  // Information about this evidence item
+  map<string, string> info = 5;
 }
 
 message Compound {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+  string id = 1;
+  string gid = 2;
+  string type = 3;
 
-    string name = 4;
+  string name = 4;
 
-    // Each synonym may end up as a node.
-    repeated string synonyms = 5;
-    string smiles = 6;
-    map<string, string> info = 7;
+  // Each synonym may end up as a node.
+  repeated string synonyms = 5;
+  string smiles = 6;
+  map<string, string> info = 7;
 }
 
 message DoseResponse {
-    double dose = 1;
-    double response = 2;
+  double dose = 1;
+  double response = 2;
 }
 
 message ResponseSummary {
-    enum SummaryType {
-        UNKNOWN = 0;
-        EC50 = 1;
-        IC50 = 2;
-        LD50 = 3;
-        GR50 = 4;
-        AMAX = 5;
-        ACTIVITY_AREA = 6;
-    }
+  enum SummaryType {
+    UNKNOWN = 0;
+    EC50 = 1;
+    IC50 = 2;
+    LD50 = 3;
+    GR50 = 4;
+    AMAX = 5;
+    AUC = 6;
+    ACTIVITY_AREA = 7;
+  }
 
-    SummaryType type = 1;
-    double value = 2;
-    string unit = 3;
+  SummaryType type = 1;
+  double value = 2;
+  string unit = 3;
 }
 
 message ResponseCurve {
-    enum ResponseType {
-        UNKNOWN = 0;
-        GROWTH = 1;
-        ACTIVITY = 2;
-    }
+  enum ResponseType {
+    UNKNOWN = 0;
+    GROWTH = 1;
+    ACTIVITY = 2;
+  }
 
-    string gid = 1;
-    ResponseType responseType = 2;
-    repeated DoseResponse values = 3;
-    double growthStandard = 4;
-    string compound = 5;
-    string sample = 6;
-    repeated ResponseSummary summary = 7; 
+  string gid = 1;
+  ResponseType responseType = 2;
+  repeated DoseResponse values = 3;
+  double growthStandard = 4;
+  string compound = 5;
+  string sample = 6;
+  repeated ResponseSummary summary = 7; 
 }
