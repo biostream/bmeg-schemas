@@ -1,0 +1,21 @@
+
+
+syntax = "proto3";
+
+package bmeg.cna;
+
+message CNACallSet {
+  // The call set ID.
+  string id = 1;
+  // The BioSample the call set data was generated from.
+  string bio_sample_id = 2;
+}
+
+message CNASegment {
+  string reference_name = 1;
+  int64 start = 2;
+  int64 end = 3;
+  float value = 4;
+  repeated string genes = 5;
+  string call_set_id = 6;
+}
