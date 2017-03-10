@@ -56,11 +56,15 @@ message Compound {
   string type = 3;
 
   string name = 4;
+  string smiles = 9;
+  string target = 5;
+  string report = 6;
+  string status = 7;
+  string rationale = 8;
 
   // Each synonym may end up as a node.
-  repeated string synonyms = 5;
-  string smiles = 6;
-  map<string, string> info = 7;
+  repeated string synonyms = 10;
+  map<string, string> info = 11;
 }
 
 message DoseResponse {
