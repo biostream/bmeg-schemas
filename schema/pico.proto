@@ -3,31 +3,55 @@ syntax = "proto3";
 package bmeg.pico;
 
 message Nil {
-    bool nil = 1;
+  bool nil = 1;
 }
 
 message Atom {
-    oneof value {
-        string binding = 1;
-        string string = 2;
-        double number = 3;
-    }
+  oneof value {
+    string symbol = 1;
+    string string = 2;
+    double number = 3;
+  }
 }
 
 message List {
-    repeated Expression items = 3;
+  repeated Expression items = 3;
 }
 
 message Fn {
-    repeated string arguments = 1;
-    Expression body = 2;
+  repeated string arguments = 1;
+  Expression body = 2;
+}
+
+message Condition {
+  Expression predicate = 1;
+  Expression truth = 2;
+  Expression falsehood = 3;
+}
+
+message Binding {
+  string symbol = 1;
+  Expression expression = 2;
+}
+
+message Let {
+  repeated Binding bindings = 1;
+  Expression body = 2;
+}
+
+message Apply {
+  Expression function = 1;
+  repeated Expression arguments = 2;
 }
 
 message Expression {
-    oneof value {
-        Nil nil = 1;
-        Atom atom = 2;
-        List list = 3;
-        Fn fn = 4;
-    }
+  oneof value {
+    Nil nil = 1;
+    Atom atom = 2;
+    List list = 3;
+    Fn fn = 4;
+    Condition condition = 5;
+    Let let = 6;
+    Apply apply = 7;
+  }
 }
