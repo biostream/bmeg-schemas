@@ -10,21 +10,21 @@ import pico_pb2 as schema
 
 def sym(symbol):
     e = schema.Expression()
-    e.atom.symbol = symbol
+    e.symbol = symbol
     return e
 
 def s(value):
     e = schema.Expression()
-    e.atom.string = value
+    e.string = value
     return e
 
 def n(value):
     e = schema.Expression()
-    e.atom.number = float(value)
+    e.number = float(value)
     return e
 
 nil = schema.Expression()
-nil.nil.nil = True
+nil.nil = True
 
 def l(*items):
     e = schema.Expression()
@@ -45,29 +45,16 @@ def cond(predicate, truth, falsehood):
     return e
     
 def bind(symbol, expression):
-    print 'bind^^^^'
-    print symbol
-    print expression
-
     b = schema.Binding()
-    b.symbol = symbol.atom.symbol
+    b.symbol = symbol.symbol
     b.expression.CopyFrom(expression)
     return b
 
 def let(bindings, body):
-    print "let!"
-    print bindings
-    print body
-
     e = schema.Expression()
-    # bind = create_bind(e.let)
-    # b = map(lambda binding: bind(binding[0], binding[1]), bindings)
     for binding in bindings:
-        print "binding++++++"
-        print binding
         b = e.let.bindings.add()
         b.CopyFrom(binding)
-        # bind(binding[0], binding[1])
     e.let.body.CopyFrom(body)
 
     return e
@@ -102,11 +89,9 @@ def tamp(z):
 def astForDef(d):
     source = inspect.getsource(d)
     tree = ast.parse(source)
-    print tree
     return tree
 
 def compilePico(token):
-    print(token.__class__)
     product = nil
     if isinstance(token, str):
         product = s(token)
@@ -140,7 +125,7 @@ def compilePico(token):
         arguments = map(compilePico, token.args)
         product = apply(function, arguments)
     elif isinstance(token, ast.Lambda):
-        arguments = map(lambda arg: compilePico(arg).atom.symbol, token.args.args)
+        arguments = map(lambda arg: compilePico(arg).symbol, token.args.args)
         body = compilePico(token.body)
         product = fn(arguments, body)
     elif isinstance(token, ast.BinOp):
@@ -151,7 +136,7 @@ def compilePico(token):
     elif isinstance(token, ast.Return):
         product = compilePico(token.value)
     elif isinstance(token, ast.FunctionDef):
-        arguments = map(lambda arg: compilePico(arg).atom.symbol, token.args.args)
+        arguments = map(lambda arg: compilePico(arg).symbol, token.args.args)
         body = map(compilePico, token.body)
         assigns = filter(lambda step: step.HasField("let"), body)
         bindings = tamp(map(lambda l: l.let.bindings, assigns))

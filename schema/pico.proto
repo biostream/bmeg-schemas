@@ -2,31 +2,19 @@ syntax = "proto3";
 
 package bmeg.pico;
 
-message Nil {
-  bool nil = 1;
-}
-
-message Atom {
-  oneof value {
-    string symbol = 1;
-    string string = 2;
-    double number = 3;
-  }
-}
-
 message List {
   repeated Expression items = 3;
-}
-
-message Fn {
-  repeated string arguments = 1;
-  Expression body = 2;
 }
 
 message Condition {
   Expression predicate = 1;
   Expression truth = 2;
   Expression falsehood = 3;
+}
+
+message Fn {
+  repeated string arguments = 1;
+  Expression body = 2;
 }
 
 message Binding {
@@ -46,12 +34,14 @@ message Apply {
 
 message Expression {
   oneof value {
-    Nil nil = 1;
-    Atom atom = 2;
-    List list = 3;
-    Fn fn = 4;
-    Condition condition = 5;
-    Let let = 6;
-    Apply apply = 7;
+    bool nil = 1;
+    string symbol = 2;
+    string string = 3;
+    double number = 4;
+    List list = 5;
+    Condition condition = 7;
+    Fn fn = 6;
+    Let let = 8;
+    Apply apply = 9;
   }
 }
