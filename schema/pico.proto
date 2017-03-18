@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package bmeg.pico;
+
+message Nil {
+    bool nil = 1;
+}
+
+message Atom {
+    oneof value {
+        string binding = 1;
+        string string = 2;
+        double number = 3;
+    }
+}
+
+message List {
+    repeated Expression items = 3;
+}
+
+message Fn {
+    repeated string arguments = 1;
+    Expression body = 2;
+}
+
+message Expression {
+    oneof value {
+        Nil nil = 1;
+        Atom atom = 2;
+        List list = 3;
+        Fn fn = 4;
+    }
+}

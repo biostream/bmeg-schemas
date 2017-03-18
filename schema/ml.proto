@@ -4,7 +4,7 @@ syntax = "proto3";
 package bmeg.ml;
 
 
-message LinearSignature {
+message SignatureTraining {
     string id = 1;
     string gid = 2;
     string type = 3;
