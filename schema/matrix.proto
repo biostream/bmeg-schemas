@@ -2,6 +2,13 @@ syntax = "proto3";
 
 package bmeg.matrix;
 
+enum ExpressionScale {
+  UNKNOWN = 0;
+  READ_COUNT = 1;
+  TPKM = 2;
+  RPKM = 3;
+}
+
 message GeneExpression {
     string id = 1;
     string gid = 2;
@@ -10,10 +17,11 @@ message GeneExpression {
     string source = 4;
     repeated string alias = 5;
 
+    ExpressionScale scale = 6;
     // Target: Biosample
-    string biosample_id = 6;
+    string biosample_id = 7;
 
-    map<string, double> expressions = 7;
+    map<string, double> expressions = 8;
 }
 
 message Cohort {
