@@ -16,6 +16,7 @@ message GeneExpression {
     map<string, double> expressions = 7;
 }
 
+// Cohort is for groups of Biosamples
 message Cohort {
     string id = 1;
     string gid = 2;
@@ -25,10 +26,21 @@ message Cohort {
     string location = 5;
     string description = 6;
 
-    // Target: Biosample
+    repeated string hasSample = 7;
+    repeated string hasMatrix = 8;
+}
+
+// IndividualCohort is for groups of Individuals
+message IndividualCohort {
+    string id = 1;
+    string gid = 2;
+    string type = 3;
+
+    string name = 4;
+    string location = 5;
+    string description = 6;
+
     repeated string hasMember = 7;
-    repeated string hasSample = 8;
-    repeated string hasMatrix = 9;
 }
 
 message DoubleVector {
