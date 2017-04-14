@@ -82,6 +82,7 @@ message ResponseSummary {
     AMAX = 5;
     AUC = 6;
     ACTIVITY_AREA = 7;
+    RMSE = 8;
   }
 
   SummaryType type = 1;
@@ -103,4 +104,6 @@ message ResponseCurve {
   string compound = 5;
   string sample = 6;
   repeated ResponseSummary summary = 7; 
+  repeated double controls = 8;
+  repeated double blanks = 9;
 }
