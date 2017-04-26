@@ -32,13 +32,13 @@ message GeneOntologyTerm {
   string id = 1;
   string namespace = 2;
   string def = 3;
-  string comment = 4:
+  string comment = 4;
   string synonym = 5;
   repeated string is_a = 6;
   repeated string alt_id = 7;
   repeated string subset = 8;
   repeated string xref = 9;
-  boolean is_obsolete = 10;
+  bool is_obsolete = 10;
   repeated string consider = 11;
 }
 
