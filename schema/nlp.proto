@@ -3,15 +3,12 @@ syntax = "proto3";
 package bmeg.nlp;
 
 message Pubmed {
-    string id = 1;
-    string gid = 2;
-    string type = 3;
+    string pmid = 1;
+    string title = 2;
+    string abstract = 3;
+    string text = 4;
+    string date = 5;
 
-    string pmid = 4;
-    string title = 5;
-    string abstract = 6;
-    string text = 7;
-
-    repeated string author = 8;
-    repeated string citation = 9;
+    repeated string author = 6;
+    repeated string citation = 7;
 }
