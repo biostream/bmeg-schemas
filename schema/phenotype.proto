@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bmeg.phenotype;
+package bmeg;
 
 message PhenotypeAssociation {
   string id = 1;

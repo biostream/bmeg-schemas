@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bmeg.matrix;
+package bmeg;
 
 enum ExpressionScale {
   UNKNOWN = 0;

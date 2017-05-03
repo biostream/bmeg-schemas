@@ -1,7 +1,7 @@
 
 syntax = "proto3";
 
-package bmeg.genome;
+package bmeg;
 
 // A `Position` is one or more (consecutive***) bases in some `Reference`. A `Position` is
 // represented by a `Reference` name, and a base number on that `Reference`

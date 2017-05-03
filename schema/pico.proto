@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bmeg.pico;
+package bmeg;
 
 message List {
   repeated Expression items = 3;
