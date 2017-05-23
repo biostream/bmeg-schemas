@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='matrix.proto',
   package='bmeg',
   syntax='proto3',
-  serialized_pb=_b('\n\x0cmatrix.proto\x12\x04\x62meg\"\x82\x02\n\x0eGeneExpression\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06source\x18\x04 \x01(\t\x12\r\n\x05\x61lias\x18\x05 \x03(\t\x12$\n\x05scale\x18\x06 \x01(\x0e\x32\x15.bmeg.ExpressionScale\x12\x14\n\x0c\x62iosample_id\x18\x07 \x01(\t\x12:\n\x0b\x65xpressions\x18\x08 \x03(\x0b\x32%.bmeg.GeneExpression.ExpressionsEntry\x1a\x32\n\x10\x45xpressionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"\x8a\x01\n\x06\x43ohort\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x10\n\x08location\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x11\n\thasSample\x18\x07 \x03(\t\x12\x11\n\thasMatrix\x18\x08 \x03(\t\"\x81\x01\n\x10IndividualCohort\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x10\n\x08location\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x11\n\thasMember\x18\x07 \x03(\t\"\x94\x01\n\x0c\x44oubleVector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12.\n\x06values\x18\x04 \x03(\x0b\x32\x1e.bmeg.DoubleVector.ValuesEntry\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"m\n\x0c\x43ohortMatrix\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06method\x18\x04 \x01(\t\x12\x11\n\thasVector\x18\x05 \x03(\t\x12\x13\n\x0bhasKeyspace\x18\x06 \x03(\t\"M\n\x08Keyspace\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0c\n\x04keys\x18\x05 \x03(\t\"J\n\x10MatrixVectorEdge\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02in\x18\x02 \x01(\t\x12\x0b\n\x03out\x18\x03 \x01(\t\x12\x0f\n\x07rowName\x18\x04 \x01(\t\"c\n\x0eMatrixAnalysis\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x14\n\x0csourceMatrix\x18\x04 \x03(\t\x12\x14\n\x0cresultMatrix\x18\x05 \x03(\t*B\n\x0f\x45xpressionScale\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nREAD_COUNT\x10\x01\x12\x08\n\x04TPKM\x10\x02\x12\x08\n\x04RPKM\x10\x03\x62\x06proto3')
+  serialized_pb=_b('\n\x0cmatrix.proto\x12\x04\x62meg\"\x82\x02\n\x0eGeneExpression\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06source\x18\x04 \x01(\t\x12\r\n\x05\x61lias\x18\x05 \x03(\t\x12$\n\x05scale\x18\x06 \x01(\x0e\x32\x15.bmeg.ExpressionScale\x12\x14\n\x0c\x62iosample_id\x18\x07 \x01(\t\x12:\n\x0b\x65xpressions\x18\x08 \x03(\x0b\x32%.bmeg.GeneExpression.ExpressionsEntry\x1a\x32\n\x10\x45xpressionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"\x8a\x01\n\x06\x43ohort\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x10\n\x08location\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x11\n\thasSample\x18\x07 \x03(\t\x12\x11\n\thasMatrix\x18\x08 \x03(\t\"x\n\x07Project\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x10\n\x08location\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x11\n\thasMember\x18\x07 \x03(\t\"\x94\x01\n\x0c\x44oubleVector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12.\n\x06values\x18\x04 \x03(\x0b\x32\x1e.bmeg.DoubleVector.ValuesEntry\x1a-\n\x0bValuesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"m\n\x0c\x43ohortMatrix\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0e\n\x06method\x18\x04 \x01(\t\x12\x11\n\thasVector\x18\x05 \x03(\t\x12\x13\n\x0bhasKeyspace\x18\x06 \x03(\t\"M\n\x08Keyspace\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0c\n\x04keys\x18\x05 \x03(\t\"J\n\x10MatrixVectorEdge\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02in\x18\x02 \x01(\t\x12\x0b\n\x03out\x18\x03 \x01(\t\x12\x0f\n\x07rowName\x18\x04 \x01(\t\"c\n\x0eMatrixAnalysis\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03gid\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x14\n\x0csourceMatrix\x18\x04 \x03(\t\x12\x14\n\x0cresultMatrix\x18\x05 \x03(\t*B\n\x0f\x45xpressionScale\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nREAD_COUNT\x10\x01\x12\x08\n\x04TPKM\x10\x02\x12\x08\n\x04RPKM\x10\x03\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -49,8 +49,8 @@ _EXPRESSIONSCALE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1074,
-  serialized_end=1140,
+  serialized_start=1064,
+  serialized_end=1130,
 )
 _sym_db.RegisterEnumDescriptor(_EXPRESSIONSCALE)
 
@@ -79,7 +79,7 @@ _GENEEXPRESSION_EXPRESSIONSENTRY = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='value', full_name='bmeg.GeneExpression.ExpressionsEntry.value', index=1,
       number=2, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -259,57 +259,57 @@ _COHORT = _descriptor.Descriptor(
 )
 
 
-_INDIVIDUALCOHORT = _descriptor.Descriptor(
-  name='IndividualCohort',
-  full_name='bmeg.IndividualCohort',
+_PROJECT = _descriptor.Descriptor(
+  name='Project',
+  full_name='bmeg.Project',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='bmeg.IndividualCohort.id', index=0,
+      name='id', full_name='bmeg.Project.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='gid', full_name='bmeg.IndividualCohort.gid', index=1,
+      name='gid', full_name='bmeg.Project.gid', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type', full_name='bmeg.IndividualCohort.type', index=2,
+      name='type', full_name='bmeg.Project.type', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name', full_name='bmeg.IndividualCohort.name', index=3,
+      name='name', full_name='bmeg.Project.name', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='location', full_name='bmeg.IndividualCohort.location', index=4,
+      name='location', full_name='bmeg.Project.location', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='description', full_name='bmeg.IndividualCohort.description', index=5,
+      name='description', full_name='bmeg.Project.description', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='hasMember', full_name='bmeg.IndividualCohort.hasMember', index=6,
+      name='hasMember', full_name='bmeg.Project.hasMember', index=6,
       number=7, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -327,8 +327,8 @@ _INDIVIDUALCOHORT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=425,
-  serialized_end=554,
+  serialized_start=424,
+  serialized_end=544,
 )
 
 
@@ -349,7 +349,7 @@ _DOUBLEVECTOR_VALUESENTRY = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='value', full_name='bmeg.DoubleVector.ValuesEntry.value', index=1,
       number=2, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -365,8 +365,8 @@ _DOUBLEVECTOR_VALUESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=660,
-  serialized_end=705,
+  serialized_start=650,
+  serialized_end=695,
 )
 
 _DOUBLEVECTOR = _descriptor.Descriptor(
@@ -416,8 +416,8 @@ _DOUBLEVECTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=557,
-  serialized_end=705,
+  serialized_start=547,
+  serialized_end=695,
 )
 
 
@@ -482,8 +482,8 @@ _COHORTMATRIX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=707,
-  serialized_end=816,
+  serialized_start=697,
+  serialized_end=806,
 )
 
 
@@ -541,8 +541,8 @@ _KEYSPACE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=818,
-  serialized_end=895,
+  serialized_start=808,
+  serialized_end=885,
 )
 
 
@@ -593,8 +593,8 @@ _MATRIXVECTOREDGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=897,
-  serialized_end=971,
+  serialized_start=887,
+  serialized_end=961,
 )
 
 
@@ -652,8 +652,8 @@ _MATRIXANALYSIS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=973,
-  serialized_end=1072,
+  serialized_start=963,
+  serialized_end=1062,
 )
 
 _GENEEXPRESSION_EXPRESSIONSENTRY.containing_type = _GENEEXPRESSION
@@ -663,7 +663,7 @@ _DOUBLEVECTOR_VALUESENTRY.containing_type = _DOUBLEVECTOR
 _DOUBLEVECTOR.fields_by_name['values'].message_type = _DOUBLEVECTOR_VALUESENTRY
 DESCRIPTOR.message_types_by_name['GeneExpression'] = _GENEEXPRESSION
 DESCRIPTOR.message_types_by_name['Cohort'] = _COHORT
-DESCRIPTOR.message_types_by_name['IndividualCohort'] = _INDIVIDUALCOHORT
+DESCRIPTOR.message_types_by_name['Project'] = _PROJECT
 DESCRIPTOR.message_types_by_name['DoubleVector'] = _DOUBLEVECTOR
 DESCRIPTOR.message_types_by_name['CohortMatrix'] = _COHORTMATRIX
 DESCRIPTOR.message_types_by_name['Keyspace'] = _KEYSPACE
@@ -693,12 +693,12 @@ Cohort = _reflection.GeneratedProtocolMessageType('Cohort', (_message.Message,),
   ))
 _sym_db.RegisterMessage(Cohort)
 
-IndividualCohort = _reflection.GeneratedProtocolMessageType('IndividualCohort', (_message.Message,), dict(
-  DESCRIPTOR = _INDIVIDUALCOHORT,
+Project = _reflection.GeneratedProtocolMessageType('Project', (_message.Message,), dict(
+  DESCRIPTOR = _PROJECT,
   __module__ = 'matrix_pb2'
-  # @@protoc_insertion_point(class_scope:bmeg.IndividualCohort)
+  # @@protoc_insertion_point(class_scope:bmeg.Project)
   ))
-_sym_db.RegisterMessage(IndividualCohort)
+_sym_db.RegisterMessage(Project)
 
 DoubleVector = _reflection.GeneratedProtocolMessageType('DoubleVector', (_message.Message,), dict(
 

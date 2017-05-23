@@ -285,7 +285,7 @@ _EXPRESSION = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='number', full_name='bmeg.Expression.number', index=3,
       number=4, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
