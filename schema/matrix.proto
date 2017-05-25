@@ -38,8 +38,7 @@ message Cohort {
     repeated string hasMatrix = 8;
 }
 
-// IndividualCohort is for groups of Individuals
-message IndividualCohort {
+message Project {
     string id = 1;
     string gid = 2;
     string type = 3;
