@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package bmeg;
 
+import "ga4gh/genotype_phenotype.proto";
+
 /*
 Data Messages related to phenotype associatation
 Some of the relavant messages are part of the GA4GH Genotype To Phenotype schema
@@ -13,20 +15,19 @@ message Predictor {
 
   // OPTIONAL
   // Specify what the model predicts. This should be an ontology node ID
-  string phenotype = 3;
+  ga4gh.PhenotypeInstance phenotype = 3;
 
   // OPTIONAL
   // Specify what the model predicts. This should be an genotype event
   string genotype = 4;
 
   // environmental factors, match to ontology terms
-  repeated string environmental_contexts = 5;
-
-  // environmental compounds
-  repeated string environmental_compounds = 6;
+  repeated ga4gh.EnvironmentalContext environmental_contexts = 5;
 
   //ID of the model that made the prediction
-  string model_id = 7;
+  string model_id = 6;
+  
+  string description = 7;
 
   //Background score data, used to evaluate significance of associations
   //BioSampleID maps to score

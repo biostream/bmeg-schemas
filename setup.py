@@ -53,7 +53,7 @@ def generate_proto(source, dest, include=".", require = True):
 
 
 for a in glob("schema/*.proto"):
-  generate_proto(a, "bmeg")
+  generate_proto(a, "bmeg", include="../ga4gh_schema/src/main/proto")
 
 for g in glob("ga4gh_schema/src/main/proto/ga4gh/*.proto"):
   generate_proto(g, "ga4gh", include="../")
