@@ -1,0 +1,19 @@
+
+syntax = "proto3";
+
+package bmeg;
+
+
+message LinearSignature {
+    string id = 1;
+    string predictor_id = 2;
+
+    repeated double quantile = 3;
+
+    double intercept = 4;
+    map<string, double> coefficients = 5;
+    map<string, double> background = 6;
+}
+
+
+
